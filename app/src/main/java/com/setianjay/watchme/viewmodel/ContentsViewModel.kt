@@ -8,4 +8,8 @@ class ContentsViewModel : ViewModel() {
 
     fun getDataMovies(isMovies: Boolean): List<Movies> =
         if (isMovies) DataDummyUtil.generateDataMovies() else DataDummyUtil.generateDataTvShows()
+
+    fun getSpecificDataMovies(position: Int, isMovies: Boolean): Movies{
+        return if(isMovies) DataDummyUtil.generateDataMovies()[position] else DataDummyUtil.generateDataTvShows()[position]
+    }
 }

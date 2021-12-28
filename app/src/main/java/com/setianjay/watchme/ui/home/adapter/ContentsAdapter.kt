@@ -9,10 +9,13 @@ import com.setianjay.watchme.databinding.ItemListContentBinding
 import com.setianjay.watchme.model.Movies
 import com.setianjay.watchme.utils.ViewUtil.load
 
-class ContentsAdapter(private val context: Context): RecyclerView.Adapter<ContentsAdapter.ViewHolder>() {
+class ContentsAdapter(
+    private val context: Context,
+    private val listener: IOnContentsAdapterListener
+) : RecyclerView.Adapter<ContentsAdapter.ViewHolder>() {
     private val contents: ArrayList<Movies> = ArrayList()
 
-    fun setContents(contents: List<Movies>){
+    fun setContents(contents: List<Movies>) {
         this.contents.apply {
             clear()
             addAll(contents)
@@ -20,8 +23,18 @@ class ContentsAdapter(private val context: Context): RecyclerView.Adapter<Conten
         notifyDataSetChanged()
     }
 
+    interface IOnContentsAdapterListener {
+        fun onClickItem(position: Int)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemListContentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            ItemListContentBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -33,8 +46,9 @@ class ContentsAdapter(private val context: Context): RecyclerView.Adapter<Conten
         return contents.size
     }
 
-    inner class ViewHolder(private val binding: ItemListContentBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(movie: Movies){
+    inner class ViewHolder(private val binding: ItemListContentBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(movie: Movies) {
             binding.apply {
                 tvTitle.text = movie.title
                 rating.rating = movie.rating
@@ -43,6 +57,10 @@ class ContentsAdapter(private val context: Context): RecyclerView.Adapter<Conten
                 tvDuration.text = context.getString(R.string.duration, movie.duration)
 
                 ivPoster.load(movie.poster)
+
+                root.setOnClickListener {
+                    listener.onClickItem(adapterPosition)
+                }
             }
         }
     }
