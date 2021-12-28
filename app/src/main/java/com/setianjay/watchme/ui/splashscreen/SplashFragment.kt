@@ -68,4 +68,10 @@ class SplashFragment : BaseFragment() {
             }
         }.start()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //unbind fragment
+        _binding = null
+    }
 }
