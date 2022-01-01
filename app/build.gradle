@@ -46,6 +46,12 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$extJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    implementation "com.android.support.test.espresso:espresso-idling-resource:$idlingVersion"
+    androidTestImplementation "androidx.navigation:navigation-testing:$navigationTestVersion"
+    androidTestImplementation "androidx.test:rules:$rulesVersion"
+    androidTestImplementation "androidx.test:runner:$runnerVersion"
+    debugImplementation("androidx.fragment:fragment-testing:$fragmentTestVersion")
 
     /* ui */
     implementation "androidx.appcompat:appcompat:$appCompatVersion"

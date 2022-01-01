@@ -9,6 +9,8 @@ import com.setianjay.watchme.R
 import com.setianjay.watchme.base.BaseFragment
 import com.setianjay.watchme.databinding.FragmentSplashBinding
 import com.setianjay.watchme.utils.AnimationUtil
+import com.setianjay.watchme.utils.EspressoIdlingResources
+import kotlinx.coroutines.*
 
 
 class SplashFragment : BaseFragment() {
@@ -50,11 +52,12 @@ class SplashFragment : BaseFragment() {
      * @thread background thread, main thread
      * */
     private fun showProgressLoading() {
-        Thread {
+        CoroutineScope(Dispatchers.Default).launch {
             val maxCounter = 100
+            EspressoIdlingResources.increment()
             for (i in 0..100 step 2) {
-                Thread.sleep(90L)
-                runOnUiThread.postDelayed({
+                withContext(Dispatchers.Main) {
+                    delay(90L)
                     binding?.apply {
                         pbHorizontal.progress = i
                         pbHorizontal.max = maxCounter
@@ -62,9 +65,12 @@ class SplashFragment : BaseFragment() {
                     }
                     if (i == maxCounter) {
                         //move to other fragment
+                            if (!EspressoIdlingResources.idlingResource.isIdleNow){
+                                EspressoIdlingResources.decrement()
+                            }
                         findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                     }
-                }, 1000L)
+                }
             }
         }.start()
     }

@@ -10,7 +10,13 @@ buildscript {
         /* testing */
         espressoVersion = "3.4.0"
         extJunitVersion = "1.1.3"
+        fragmentTestVersion = "1.4.0"
+        idlingVersion = "3.0.2"
         junitVersion = "4.13.1"
+        navigationTestVersion = "2.3.5"
+        rulesVersion = "1.4.0"
+        runnerVersion = "1.4.0"
+
 
         /* ui */
         appCompatVersion = "1.4.0"
