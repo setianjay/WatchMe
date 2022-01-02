@@ -15,31 +15,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <!--    <TextView-->
-            <!--        android:id="@+id/tv_title_page"-->
-            <!--        android:layout_width="0dp"-->
-            <!--        android:layout_height="wrap_content"-->
-            <!--        android:layout_marginTop="27dp"-->
-            <!--        android:layout_marginEnd="@dimen/dp_10"-->
-            <!--        android:fontFamily="@font/montserrat_bold"-->
-            <!--        tools:text="Detail Movie"-->
-            <!--        android:textAlignment="center"-->
-            <!--        android:textColor="@color/white_primary"-->
-            <!--        android:textSize="@dimen/sp_20"-->
-            <!--        app:layout_constraintStart_toStartOf="parent"-->
-            <!--        app:layout_constraintTop_toTopOf="parent"-->
-            <!--        app:layout_constraintEnd_toStartOf="@id/iv_bookmark"/>-->
-
-            <!--    <ImageView-->
-            <!--        android:id="@+id/iv_bookmark"-->
-            <!--        android:layout_width="@dimen/dp_24"-->
-            <!--        android:layout_height="@dimen/dp_24"-->
-            <!--        android:contentDescription="@string/bookmark_image"-->
-            <!--        android:src="@drawable/ic_bookmark_not_selected"-->
-            <!--        app:layout_constraintTop_toTopOf="@id/tv_title_page"-->
-            <!--        app:layout_constraintEnd_toEndOf="parent"-->
-            <!--        app:layout_constraintBottom_toBottomOf="@id/tv_title_page"/>-->
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/parent_poster"
