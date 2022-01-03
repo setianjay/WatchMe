@@ -1,5 +1,6 @@
 package com.setianjay.watchme.viewmodel
 
+import com.setianjay.watchme.model.Movies
 import com.setianjay.watchme.utils.DataDummyUtil
 import junit.framework.Assert.*
 import org.junit.Before
@@ -27,7 +28,8 @@ class ContentsViewModelTest {
      * */
     @Test
     fun testGetDataMoviesSize() {
-        checkMoviesDataSize(isMovies = true)
+        val movies = viewModel.getDataMovies(true)
+        checkMoviesDataSize(expected = dummyMovies, actual = movies)
     }
 
 
@@ -38,7 +40,8 @@ class ContentsViewModelTest {
      * */
     @Test
     fun testGetDataTvShowsSize() {
-        checkMoviesDataSize(isMovies = false)
+        val tvShows = viewModel.getDataMovies(false)
+        checkMoviesDataSize(expected = dummyTvShows, actual = tvShows)
     }
 
 
@@ -49,7 +52,9 @@ class ContentsViewModelTest {
      * */
     @Test
     fun testGetSpecificMoviesData() {
-        checkSpecificMovie(isMovies = true, positionAt = 0)
+        val position = 0
+        val specificMovies = viewModel.getSpecificDataMovies(position, true)
+        checkSpecificMovie(expected = dummyMovies, actual = specificMovies, positionAt = position)
     }
 
     /**
@@ -59,7 +64,9 @@ class ContentsViewModelTest {
      * */
     @Test
     fun testGetSpecificTvShowsData() {
-        checkSpecificMovie(isMovies = false, positionAt = 1)
+        val position = 1
+        val specificTvShows = viewModel.getSpecificDataMovies(position, false)
+        checkSpecificMovie(expected = dummyTvShows, actual = specificTvShows, positionAt = position)
     }
 
     /**
@@ -70,7 +77,9 @@ class ContentsViewModelTest {
      * */
     @Test
     fun testWrongGetSpecificMoviesData(){
-        checkSpecificWrongMovie(isMovies = false, positionAt = 0)
+        val position = 0
+        val wrongSpecificMoviesData = viewModel.getSpecificDataMovies(position, false)
+        checkSpecificWrongMovie(expected = dummyMovies, actual = wrongSpecificMoviesData, positionAt = position)
     }
 
     /**
@@ -81,66 +90,60 @@ class ContentsViewModelTest {
      * */
     @Test
     fun testWrongGetSpecificTvShowsData(){
-        checkSpecificWrongMovie(isMovies = true, positionAt = 1)
+        val position = 1
+        val wrongSpecificTvShowsData = viewModel.getSpecificDataMovies(position, true)
+        checkSpecificWrongMovie(expected = dummyTvShows, actual = wrongSpecificTvShowsData, positionAt = position)
     }
 
     /**
      * check size of movies data
      *
-     * @param isMovies      <code>true</code> obtain list of movie data, otherwise list of tv show data (@field movie)
-     *
-     * @output              success, if size of list data is same with data resources size
+     * @param expected      expected data
+     * @param actual        real data / actual data
+     * @output              success, if size of actual data same with expected size data
      * */
-    private fun checkMoviesDataSize(isMovies: Boolean){
-        val movie = viewModel.getDataMovies(isMovies)
-        val moviesResourcesData = if (isMovies) dummyMovies else dummyTvShows
-        assertNotNull(movie)
-        assertEquals(moviesResourcesData.size, movie.size)
+    private fun checkMoviesDataSize(expected: List<Movies>, actual: List<Movies>){
+        assertNotNull(actual)
+        assertEquals(expected.size, actual.size)
     }
 
     /**
      * check specific movie, whether is same
      *
-     * @param isMovies      <code>true</code> obtain movie data, otherwise tv show data (@field movie)
+     * @param expected      expected data
+     * @param actual        real data / actual data
      * @param positionAt    the position of the data you want to check
      *
-     * @output              success, if data is same with data resources
+     * @output              success, if actual data same with expected data
      * */
-    private fun checkSpecificMovie(isMovies: Boolean, positionAt: Int) {
-        val movie = viewModel.getSpecificDataMovies(positionAt, isMovies)
-        //get data resource based on argument
-        val moviesResourceData =
-            if (isMovies) dummyMovies else dummyTvShows
-        assertNotNull(movie)
-        assertEquals(moviesResourceData[positionAt].title, movie.title)
-        assertEquals(moviesResourceData[positionAt].poster, movie.poster)
-        assertEquals(moviesResourceData[positionAt].duration, movie.duration)
-        assertEquals(moviesResourceData[positionAt].director, movie.director)
-        assertEquals(moviesResourceData[positionAt].rating, movie.rating)
-        assertEquals(moviesResourceData[positionAt].genre.size, movie.genre.size)
-        assertEquals(moviesResourceData[positionAt].overview, movie.overview)
+    private fun checkSpecificMovie(expected: List<Movies>, actual: Movies, positionAt: Int) {
+        assertNotNull(actual)
+        assertEquals(expected[positionAt].title, actual.title)
+        assertEquals(expected[positionAt].poster, actual.poster)
+        assertEquals(expected[positionAt].duration, actual.duration)
+        assertEquals(expected[positionAt].director, actual.director)
+        assertEquals(expected[positionAt].rating, actual.rating)
+        assertEquals(expected[positionAt].genre.size, actual.genre.size)
+        assertEquals(expected[positionAt].overview, actual.overview)
     }
 
     /**
      * check specific movie, whether is wrong
      *
-     * @param isMovies      <code>true</code> obtain movie data, otherwise tv show data (@field movie)
+     * @param expected      expected data
+     * @param actual        real data / actual data
      * @param positionAt    the position of the data you want to check
      *
-     * @output              success, if data is not same with data resources
+     * @output              success, if actual data not same with expected data
      * */
-    private fun checkSpecificWrongMovie(isMovies: Boolean, positionAt: Int){
-        val movie = viewModel.getSpecificDataMovies(positionAt, isMovies)
-        //get data resource based on argument
-        val moviesResourceData =
-            if (isMovies) dummyTvShows else dummyMovies
-        assertNotNull(movie)
-        assertNotSame(moviesResourceData[positionAt].title, movie.title)
-        assertNotSame(moviesResourceData[positionAt].poster, movie.poster)
-        assertNotSame(moviesResourceData[positionAt].duration, movie.duration)
-        assertNotSame(moviesResourceData[positionAt].director, movie.director)
-        assertNotSame(moviesResourceData[positionAt].rating, movie.rating)
-        assertNotSame(moviesResourceData[positionAt].genre.size, movie.genre.size)
-        assertNotSame(moviesResourceData[positionAt].overview, movie.overview)
+    private fun checkSpecificWrongMovie(expected: List<Movies>, actual: Movies, positionAt: Int){
+        assertNotNull(actual)
+        assertNotSame(expected[positionAt].title, actual.title)
+        assertNotSame(expected[positionAt].poster, actual.poster)
+        assertNotSame(expected[positionAt].duration, actual.duration)
+        assertNotSame(expected[positionAt].director, actual.director)
+        assertNotSame(expected[positionAt].rating, actual.rating)
+        assertNotSame(expected[positionAt].genre.size, actual.genre.size)
+        assertNotSame(expected[positionAt].overview, actual.overview)
     }
 }
