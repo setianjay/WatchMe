@@ -1,3 +1,44 @@
 <resources>
+    <!-- application name -->
     <string name="app_name">WatchMe</string>
+
+    <!-- splash fragment -->
+    <string name="created_by_hari_setiaji">Created by Hari Setiaji</string>
+    <string name="everywhere">Everywhere</string>
+    <string name="find_your_favorite_movies_or_tv_shows">Find your favorite movies or tv shows</string>
+    <string name="from">From</string>
+    <string name="from_everywhere">from everywhere</string>
+    <string name="percentage">%d %%</string>
+    <string name="watch">Watch</string>
+
+    <!-- home fragment -->
+    <string name="categories">Categories</string>
+    <string name="categories_movies">Movies</string>
+    <string name="categories_tv_shows">Tv Shows</string>
+    <string name="duration">Duration: %s</string>
+    <string name="filter_image">Image Filters</string>
+    <string name="hello_username">Hello, Vinsmoke Sanji</string>
+    <string name="menus_image">Image Menus</string>
+    <string name="poster_image">Poster Image</string>
+    <string name="search_hint">Search for a movies in here</string>
+    <string name="search_image">Search Image</string>
+    <string name="text_info_in_home">Find your favorite movies or tv shows</string>
+    <string name="user_image">User Image</string>
+
+    <!-- detail movie fragment -->
+    <string name="bookmark_image">Bookmark Image</string>
+    <string name="director">Director: %s</string>
+    <string name="long_text">
+        lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet.
+        lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet.
+        lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet.
+    </string>
+    <string name="overview">Overview</string>
+
+    <!-- dummies -->
+    <string name="director_dummy">Director: John Doe</string>
+    <string name="duration_dummy">Duration: 2h 47m</string>
+    <string name="genre_dummy">Adventure, Thriller, Comedy</string>
+    <string name="time_dummy">2h 43m</string>
+    <string name="title_dummy">Marvel\'s: Iron Fist</string>
 </resources>
