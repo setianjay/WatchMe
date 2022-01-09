@@ -39,8 +39,19 @@ dependencies {
     /* core */
     implementation "androidx.core:core-ktx:$coreKtxVersion"
 
+    /* livedata */
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedataVersion"
+
     /* logging */
     implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    /* retrofit(networking request) */
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    //okhttp
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:$okhttpVersion"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
 
     /* testing */
     testImplementation "junit:junit:$junitVersion"
@@ -75,6 +86,4 @@ dependencies {
     implementation "androidx.activity:activity-ktx:$viewmodelKtxVersion"
     //fragment ktx
     implementation "androidx.fragment:fragment-ktx:$viewmodelKtxVersion"
-
-
 }

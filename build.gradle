@@ -4,6 +4,9 @@ buildscript {
         /* core */
         coreKtxVersion = "1.7.0"
 
+        /* livedata */
+        livedataVersion = '2.4.0'
+
         /* logging */
         timberVersion = "5.0.1"
 
@@ -31,6 +34,10 @@ buildscript {
         /* view model */
         viewmodelVersion = "2.2.0"
         viewmodelKtxVersion = "1.4.0"
+
+        /* retrofit (network request) */
+        okhttpVersion = '4.9.3'
+        retrofitVersion = '2.9.0'
     }
     repositories {
         google()
