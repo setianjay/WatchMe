@@ -15,19 +15,19 @@ buildscript {
         extJunitVersion = "1.1.3"
         fragmentTestVersion = "1.4.0"
         idlingVersion = "3.0.2"
-        junitVersion = "4.13.1"
+        junitVersion = '4.13.2'
         navigationTestVersion = "2.3.5"
         rulesVersion = "1.4.0"
         runnerVersion = "1.4.0"
 
 
         /* ui */
-        appCompatVersion = "1.4.0"
+        appCompatVersion = '1.4.1'
         circleImageVersion = "3.1.0"
         constraintLayoutVersion = "2.1.2"
         glideVersion = "4.12.0"
         legacySupportVersion = "1.0.0"
-        lottieVersion = "3.4.0"
+        lottieVersion = '4.2.2'
         materialVersion = "1.4.0"
         navigationVersion = "2.3.5"
 
