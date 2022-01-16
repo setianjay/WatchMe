@@ -1,22 +1,27 @@
 package com.setianjay.watchme.ui.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.setianjay.watchme.R
 import com.setianjay.watchme.base.BaseFragment
+import com.setianjay.watchme.data.source.local.entity.MovieEntity
+import com.setianjay.watchme.data.source.remote.Resource
 import com.setianjay.watchme.databinding.FragmentDetailMovieBinding
 import com.setianjay.watchme.utils.ViewUtil.load
-import com.setianjay.watchme.viewmodel.ContentsViewModel
+import com.setianjay.watchme.utils.ViewUtil.show
 
 class DetailMovieFragment : BaseFragment() {
     private var _binding: FragmentDetailMovieBinding? = null
     private val binding get() = _binding
 
-    private val contentsViewModel by viewModels<ContentsViewModel>()
+    private val detailViewModel by viewModels<DetailViewModel>{
+        movieViewModelFactory
+    }
+
+    private var detailMovie: MovieEntity? = null
 
     override fun onBindView(
         inflater: LayoutInflater,
@@ -32,27 +37,82 @@ class DetailMovieFragment : BaseFragment() {
     }
 
     /**
-     * show detail movie based on movie by user clicked
+     * show detail movie
      * */
     private fun showDetailMovie() {
-        val position: Int
+        val movieId: Long
         val isMovies: Boolean
+
+        //get data from safeargs
         DetailMovieFragmentArgs.fromBundle(arguments as Bundle).apply {
-            position = this.position
+            movieId = this.movieId
             isMovies = this.isMovies
         }
 
-        val movie = contentsViewModel.getSpecificDataMovies(position, isMovies)
+        //get observer for detail movie based on movie id and is movies value
+        observe(movieId, isMovies)
+    }
 
+    /**
+     * to obtain data from observer
+     *
+     * @param movieId       id of movie
+     * @param isMovies      if true the data is detail of movie popular, otherwise detail of tv popular
+     * */
+    private fun observe(movieId: Long, isMovies: Boolean){
+        if (isMovies){
+            detailViewModel.getMovieDetail(movieId).observe(viewLifecycleOwner){ response ->
+                when(response.statusType){
+                    Resource.StatusType.LOADING -> {
+                        binding?.pbLoading?.show(true)
+                        binding?.parentDetailContent?.show(false)
+                    }
+                    Resource.StatusType.SUCCESS -> {
+                        binding?.pbLoading?.show(false)
+                        binding?.parentDetailContent?.show(true)
+                        detailMovie = response?.data
+                        detailMovie?.let { populateData(it) }
+                    }
+                    Resource.StatusType.ERROR -> {
+                        binding?.pbLoading?.show(false)
+                    }
+                }
+            }
+        }else{
+            detailViewModel.getTvDetail(movieId).observe(viewLifecycleOwner){ response ->
+                when(response.statusType){
+                    Resource.StatusType.LOADING -> {
+                        binding?.pbLoading?.show(true)
+                        binding?.parentDetailContent?.show(false)
+                    }
+                    Resource.StatusType.SUCCESS -> {
+                        binding?.pbLoading?.show(false)
+                        binding?.parentDetailContent?.show(true)
+                        detailMovie = response?.data
+                        detailMovie?.let { populateData(it) }
+                    }
+                    Resource.StatusType.ERROR -> {
+                        binding?.pbLoading?.show(false)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * populate data to screen
+     *
+     * @param detailMovie       data of detail movie
+     * */
+    private fun populateData(detailMovie: MovieEntity){
         binding?.apply {
-            ivPoster.load(movie.poster)
-            tvTitle.text = movie.title
-            tvGenre.text = movie.genre.joinToString(",")
-            tvDuration.text = movie.duration
-            tvDirector.text = resources.getString(R.string.director, movie.director)
-            rating.rating = movie.rating
-            tvRating.text = "${movie.rating}"
-            tvOverview.text = movie.overview
+            ivPoster.load(detailMovie.poster)
+            tvTitle.text = detailMovie.title
+            tvGenre.text = detailMovie.genre
+            tvDirector.text = resources.getString(R.string.release, detailMovie.release)
+            rating.rating = detailMovie.rating
+            tvRating.text = "${detailMovie.rating}"
+            tvOverview.text = detailMovie.overview
         }
     }
 

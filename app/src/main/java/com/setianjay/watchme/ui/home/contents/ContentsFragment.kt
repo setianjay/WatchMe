@@ -71,6 +71,11 @@ class ContentsFragment private constructor() : BaseFragment(),
         }
     }
 
+    /**
+     * to obtain data from observer
+     *
+     * @param isMovies      if true the data is movie popular, otherwise tv popular
+     * */
     private fun observer(isMovies: Boolean, adapter: ContentsAdapter) {
         if (isMovies) {
             contentsViewModel.getDataMovies().observe(viewLifecycleOwner) { response ->
