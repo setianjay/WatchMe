@@ -13,7 +13,7 @@ import retrofit2.Response
 import java.lang.Exception
 import java.lang.StringBuilder
 
-class MovieRepository(private val apiHelper: MovieDbApiHelper) : IMovieDataSource {
+class MovieRepository private constructor(private val apiHelper: MovieDbApiHelper) : IMovieDataSource {
 
     //coroutineScope for handle background process
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
@@ -287,5 +287,17 @@ class MovieRepository(private val apiHelper: MovieDbApiHelper) : IMovieDataSourc
             }
         }
         return tvDetailResult
+    }
+
+    companion object{
+        private var INSTANCE: MovieRepository? = null
+
+        fun getInstance(movieRepository:  MovieDbApiHelper): MovieRepository {
+            return INSTANCE ?: synchronized(this) {
+                val instance = MovieRepository(movieRepository)
+                INSTANCE = instance
+                instance
+            }
+        }
     }
 }

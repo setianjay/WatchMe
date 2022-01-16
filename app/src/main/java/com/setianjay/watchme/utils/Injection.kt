@@ -14,6 +14,6 @@ object Injection {
     fun provideMovieRepository(): MovieRepository{
         val apiHelper = MovieDbApiHelper(MovieDbApiBuilder.getApiService())
 
-        return MovieRepository(apiHelper)
+        return MovieRepository.getInstance(apiHelper)
     }
 }
