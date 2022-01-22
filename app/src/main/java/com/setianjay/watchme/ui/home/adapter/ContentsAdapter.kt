@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.setianjay.watchme.R
 import com.setianjay.watchme.data.source.local.entity.MovieEntity
 import com.setianjay.watchme.databinding.ItemListContentBinding
+import com.setianjay.watchme.utils.FormatUtil
 import com.setianjay.watchme.utils.ViewUtil.load
 
 class ContentsAdapter(
@@ -53,8 +54,8 @@ class ContentsAdapter(
                 tvTitle.text = movie.title
                 rating.rating = movie.rating
                 tvRating.text = "${movie.rating}"
-                tvGenre.text = movie.genre
-                tvRelease.text = context.getString(R.string.release, movie.release)
+                tvGenre.text = FormatUtil.genreFormat(movie.genre)
+                tvRelease.text = context.getString(R.string.release, FormatUtil.dateFormat(movie.release))
 
                 ivPoster.load(movie.poster)
 

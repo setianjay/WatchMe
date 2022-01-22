@@ -89,7 +89,7 @@
                 tools:text="@string/genre_dummy" />
 
             <TextView
-                android:id="@+id/tv_director"
+                android:id="@+id/tv_release"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_7"
@@ -108,7 +108,7 @@
                 android:layout_marginTop="@dimen/dp_5"
                 android:theme="@style/RatingBar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_director"
+                app:layout_constraintTop_toBottomOf="@id/tv_release"
                 tools:rating="5" />
 
             <TextView

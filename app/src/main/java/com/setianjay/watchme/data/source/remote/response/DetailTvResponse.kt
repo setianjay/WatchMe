@@ -12,6 +12,5 @@ data class DetailTvResponse(
     @SerializedName("poster_path") val poster: String,
     @SerializedName("vote_average") val rating: Float,
     @SerializedName("first_air_date") val releaseDate: String,
-    @SerializedName("tagline") val tag: String,
     @SerializedName("name") val title: String
 )

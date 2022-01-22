@@ -10,6 +10,7 @@ import com.setianjay.watchme.base.BaseFragment
 import com.setianjay.watchme.data.source.local.entity.MovieEntity
 import com.setianjay.watchme.data.source.remote.Resource
 import com.setianjay.watchme.databinding.FragmentDetailMovieBinding
+import com.setianjay.watchme.utils.FormatUtil
 import com.setianjay.watchme.utils.ViewUtil.load
 import com.setianjay.watchme.utils.ViewUtil.show
 
@@ -108,8 +109,8 @@ class DetailMovieFragment : BaseFragment() {
         binding?.apply {
             ivPoster.load(detailMovie.poster)
             tvTitle.text = detailMovie.title
-            tvGenre.text = detailMovie.genre
-            tvDirector.text = resources.getString(R.string.release, detailMovie.release)
+            tvGenre.text = FormatUtil.genreFormat(detailMovie.genre)
+            tvRelease.text = resources.getString(R.string.release, FormatUtil.dateFormat(detailMovie.release))
             rating.rating = detailMovie.rating
             tvRating.text = "${detailMovie.rating}"
             tvOverview.text = detailMovie.overview

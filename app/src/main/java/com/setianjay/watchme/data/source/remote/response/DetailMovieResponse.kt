@@ -12,6 +12,5 @@ data class DetailMovieResponse(
     @SerializedName("poster_path") val poster: String,
     @SerializedName("vote_average") val rating: Float,
     @SerializedName("release_date") val releaseDate: String,
-    @SerializedName("tagline") val tag: String,
     @SerializedName("title") val title: String
 )
