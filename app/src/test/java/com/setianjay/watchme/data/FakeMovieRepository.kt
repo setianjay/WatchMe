@@ -1,7 +1,8 @@
-package com.setianjay.watchme.data.repository
+package com.setianjay.watchme.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.setianjay.watchme.data.repository.IMovieDataSource
 import com.setianjay.watchme.data.source.local.entity.MovieEntity
 import com.setianjay.watchme.data.source.remote.MovieDbApiHelper
 import com.setianjay.watchme.data.source.remote.Resource
@@ -11,10 +12,20 @@ import com.setianjay.watchme.data.source.remote.response.DetailTvResponse
 import com.setianjay.watchme.data.source.remote.response.MovieResponse
 import com.setianjay.watchme.data.source.remote.response.TvResponse
 import com.setianjay.watchme.utils.DataDummyUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
-class MovieRepository private constructor(private val apiHelper: MovieDbApiHelper) :
+class FakeMovieRepository(private val apiHelper: MovieDbApiHelper) :
     IMovieDataSource {
 
+    //coroutineScope for handle background process
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
+
+    /**
+     * to get list of movie popular
+     *
+     * @return  LiveData<Resource<List<MovieEntity>>>
+     * */
     /**
      * to get list of movie popular
      *
@@ -22,15 +33,13 @@ class MovieRepository private constructor(private val apiHelper: MovieDbApiHelpe
      * */
     override fun getMoviesPopular(): LiveData<Resource<List<MovieEntity>>> {
         val moviesResult = MutableLiveData<Resource<List<MovieEntity>>>()
+
         moviesResult.postValue(Resource.loading())
         apiHelper.getMoviesPopular(object : MovieDbApiHelper.LoadMoviesCallback {
             override fun onAllMoviesReceived(movies: List<MovieResponse.MovieItem>) {
                 val listMovie = ArrayList<MovieEntity>()
                 if (movies.isNotEmpty()) {
                     for (i in movies.indices) {
-                        //to get specific genre based on list genreId
-
-
                         //move movie response to movie entity
                         val movieEntity = MovieEntity(
                             movies[i].movieId,
@@ -54,7 +63,6 @@ class MovieRepository private constructor(private val apiHelper: MovieDbApiHelpe
         return moviesResult
     }
 
-
     /**
      * to get list of tv popular
      *
@@ -69,8 +77,6 @@ class MovieRepository private constructor(private val apiHelper: MovieDbApiHelpe
                 val listTv = ArrayList<MovieEntity>()
                 if (tv.isNotEmpty()) {
                     for (i in tv.indices) {
-                        //to get specific genre based on list genreId
-
                         //move tv response to movie entity
                         val movieEntity = MovieEntity(
                             tv[i].tvId,
@@ -160,17 +166,5 @@ class MovieRepository private constructor(private val apiHelper: MovieDbApiHelpe
             }
         })
         return tvDetailResult
-    }
-
-    companion object {
-        private var INSTANCE: MovieRepository? = null
-
-        fun getInstance(movieRepository: MovieDbApiHelper): MovieRepository {
-            return INSTANCE ?: synchronized(this) {
-                val instance = MovieRepository(movieRepository)
-                INSTANCE = instance
-                instance
-            }
-        }
     }
 }

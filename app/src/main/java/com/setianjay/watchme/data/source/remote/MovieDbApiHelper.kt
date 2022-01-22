@@ -1,58 +1,112 @@
 package com.setianjay.watchme.data.source.remote
 
-import com.setianjay.watchme.data.source.remote.response.*
+import com.setianjay.watchme.data.source.remote.response.DetailMovieResponse
+import com.setianjay.watchme.data.source.remote.response.DetailTvResponse
+import com.setianjay.watchme.data.source.remote.response.MovieResponse
+import com.setianjay.watchme.data.source.remote.response.TvResponse
 import com.setianjay.watchme.data.source.remote.retrofit.MovieDbEndpoint
-import retrofit2.Response
+import com.setianjay.watchme.utils.BackgroundUtil
+import com.setianjay.watchme.utils.EspressoIdlingResources
+import kotlinx.coroutines.launch
 
 /**
  * helper class for calling endpoint of API
  * */
 class MovieDbApiHelper(private val movieDbEndpoint: MovieDbEndpoint) {
+    //coroutine for running background task
+    private val coroutineScope = BackgroundUtil.coroutineScope
 
     /* interface for handle callback data */
-    interface LoadMoviesCallback{
-        fun onAllMoviesReceived(movies: Response<MovieResponse>)
+    interface LoadMoviesCallback {
+        fun onAllMoviesReceived(movies: List<MovieResponse.MovieItem>)
     }
 
-    interface LoadTvCallback{
-        fun onAllTvReceived(tv: Response<TvResponse>)
+    interface LoadTvCallback {
+        fun onAllTvReceived(tv: List<TvResponse.TvItem>)
     }
 
-    interface LoadGenresCallback{
-        fun onAllGenresReceived(genres: Response<GenresResponse>)
+    interface LoadMovieDetailCallback {
+        fun onMovieDetailReceived(movie: DetailMovieResponse)
     }
 
-    interface LoadMovieDetail{
-        fun onMovieDetailReceived(movie: Response<DetailMovieResponse>)
-    }
-
-    interface LoadTvDetail{
-        fun onTvDetailReceived(tv: Response<DetailTvResponse>)
+    interface LoadTvDetailCallback {
+        fun onTvDetailReceived(tv: DetailTvResponse)
     }
 
     /* function helper to call each endpoint of api */
-    suspend fun getMoviesPopular(callback: LoadMoviesCallback) {
-        callback.onAllMoviesReceived(movieDbEndpoint.getMoviePopular())
+    fun getMoviesPopular(callback: LoadMoviesCallback) {
+        EspressoIdlingResources.increment()
+        coroutineScope.launch {
+            try {
+                val dataResponse = movieDbEndpoint.getMoviePopular()
+                if (dataResponse.isSuccessful) {
+                    val listMovies = dataResponse.body()?.moviesItem
+                    if (listMovies != null) {
+                        callback.onAllMoviesReceived(listMovies)
+                    }
+                    EspressoIdlingResources.decrement()
+                } else {
+                    callback.onAllMoviesReceived(emptyList())
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                callback.onAllMoviesReceived(emptyList())
+            }
+        }
     }
 
-    suspend fun getTvPopular(callback: LoadTvCallback) {
-        callback.onAllTvReceived(movieDbEndpoint.getTvPopular())
+    fun getTvPopular(callback: LoadTvCallback) {
+        coroutineScope.launch {
+            EspressoIdlingResources.increment()
+            try {
+                val dataResponse = movieDbEndpoint.getTvPopular()
+                if (dataResponse.isSuccessful) {
+                    val listMovies = dataResponse.body()?.tv
+                    if (listMovies != null) {
+                        callback.onAllTvReceived(listMovies)
+                    }
+                    EspressoIdlingResources.decrement()
+                } else {
+                    callback.onAllTvReceived(emptyList())
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                callback.onAllTvReceived(emptyList())
+            }
+        }
     }
 
-    suspend fun getMovieGenres(callback: LoadGenresCallback){
-        callback.onAllGenresReceived(movieDbEndpoint.getMovieGenre())
+    fun getMovieDetail(movieId: Long, callback: LoadMovieDetailCallback) {
+        EspressoIdlingResources.increment()
+        coroutineScope.launch {
+            try {
+                val dataResponse = movieDbEndpoint.getMovieDetail(movieId)
+                if (dataResponse.isSuccessful) {
+                    val detailMovie = dataResponse.body()
+                    detailMovie?.let { callback.onMovieDetailReceived(it) }
+                }
+                EspressoIdlingResources.decrement()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
-    suspend fun getTvGenres(callback: LoadGenresCallback){
-        callback.onAllGenresReceived(movieDbEndpoint.getTvGenre())
-    }
-
-    suspend fun getMovieDetail(movieId: Long, callback: LoadMovieDetail){
-        callback.onMovieDetailReceived(movieDbEndpoint.getMovieDetail(movieId))
-    }
-
-    suspend fun getTvDetail(movieId: Long, callback: LoadTvDetail){
-        callback.onTvDetailReceived(movieDbEndpoint.getTvDetail(movieId))
+    fun getTvDetail(movieId: Long, callback: LoadTvDetailCallback) {
+        EspressoIdlingResources.increment()
+        coroutineScope.launch {
+            try {
+                val dataResponse = movieDbEndpoint.getTvDetail(movieId)
+                if (dataResponse.isSuccessful) {
+                    val detailMovie = dataResponse.body()
+                    detailMovie?.let { callback.onTvDetailReceived(it) }
+                }
+                EspressoIdlingResources.decrement()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
 }
+

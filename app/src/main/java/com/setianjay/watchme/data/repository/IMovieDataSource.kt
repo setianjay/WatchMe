@@ -10,10 +10,6 @@ interface IMovieDataSource {
 
     fun getTvPopular(): LiveData<Resource<List<MovieEntity>>>
 
-    suspend fun getMoviesGenre(genreId: List<Int>): String
-
-    suspend fun getTvGenre(genreId: List<Int>): String
-
     fun getMovieDetail(movieId: Long): LiveData<Resource<MovieEntity>>
 
     fun getTvDetail(movieId: Long): LiveData<Resource<MovieEntity>>

@@ -15,12 +15,6 @@ interface MovieDbEndpoint {
     @GET("tv/popular")
     suspend fun getTvPopular(@Query("api_key") apiKey: String = BuildConfig.API_KEY): Response<TvResponse>
 
-    @GET("genre/movie/list")
-    suspend fun getMovieGenre(@Query("api_key") apiKey: String = BuildConfig.API_KEY): Response<GenresResponse>
-
-    @GET("genre/tv/list")
-    suspend fun getTvGenre(@Query("api_key") apiKey: String = BuildConfig.API_KEY): Response<GenresResponse>
-
     @GET("movie/{id}")
     suspend fun getMovieDetail(@Path("id") id: Long, @Query("api_key") apiKey: String = BuildConfig.API_KEY): Response<DetailMovieResponse>
 
