@@ -35,9 +35,9 @@ class ContentsViewModelTest {
     @Mock
     private lateinit var observer: Observer<Resource<List<MovieEntity>>>
 
-    private val dummyMovies get() = DataDummyUtil.generateRemoteDataMovies()
+    private val dummyMovies get() = DataDummyUtil.generateDataMovies()
 
-    private val dummyTvShows get() = DataDummyUtil.generateRemoteDataTv()
+    private val dummyTvShows get() = DataDummyUtil.generateDataTvShows()
 
     @Before
     fun setup() {

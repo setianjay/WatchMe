@@ -34,10 +34,10 @@ class DetailViewModelTest {
     @Mock
     private lateinit var observer: Observer<Resource<MovieEntity>>
 
-    private val dummyMovies get() = DataDummyUtil.generateRemoteDataMovies()[0]
+    private val dummyMovies get() = DataDummyUtil.generateDataMovies()[0]
     private val movieId = dummyMovies.movieId
 
-    private val dummyTv get() = DataDummyUtil.generateRemoteDataTv()[0]
+    private val dummyTv get() = DataDummyUtil.generateDataTvShows()[0]
     private val tvId = dummyTv.movieId
 
     @Before
