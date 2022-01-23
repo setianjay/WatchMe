@@ -48,9 +48,7 @@ class MovieRepositoryTest {
         assertEquals(movieResponse.size.toLong(), movies?.size?.toLong())
     }
 
-    /*
-    * - movies data masih null (ubah return callback di movieDbHelper + return data dummy)
-    * */
+
     @Test
     fun getTvPopular() {
         doAnswer { invocation ->
@@ -59,9 +57,10 @@ class MovieRepositoryTest {
             null
         }.`when`(apiHelper).getTvPopular(any())
 
-        val movies = LiveDataUtil.getValue(movieRepository.getTvPopular())
+        val movies = LiveDataUtil.getValue(movieRepository.getTvPopular()).data
         verify(apiHelper).getTvPopular(any())
-        println(movies.statusType)
+        assertNotNull(movies)
+        assertEquals(tvResponse.size.toLong(), movies?.size?.toLong())
     }
 
 
