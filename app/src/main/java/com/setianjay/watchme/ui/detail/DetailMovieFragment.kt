@@ -10,9 +10,11 @@ import com.setianjay.watchme.base.BaseFragment
 import com.setianjay.watchme.data.source.local.entity.MovieEntity
 import com.setianjay.watchme.data.source.remote.Resource
 import com.setianjay.watchme.databinding.FragmentDetailMovieBinding
+import com.setianjay.watchme.utils.DataDummyUtil
 import com.setianjay.watchme.utils.FormatUtil
 import com.setianjay.watchme.utils.ViewUtil.load
 import com.setianjay.watchme.utils.ViewUtil.show
+import timber.log.Timber
 
 class DetailMovieFragment : BaseFragment() {
     private var _binding: FragmentDetailMovieBinding? = null
@@ -52,6 +54,7 @@ class DetailMovieFragment : BaseFragment() {
 
         //get observer for detail movie based on movie id and is movies value
         observe(movieId, isMovies)
+        Timber.d("overview: ${DataDummyUtil.generateDataTvShows()[0].overview}")
     }
 
     /**
@@ -106,6 +109,7 @@ class DetailMovieFragment : BaseFragment() {
      * @param detailMovie       data of detail movie
      * */
     private fun populateData(detailMovie: MovieEntity){
+        Timber.d("overview response: ${detailMovie.overview}")
         binding?.apply {
             ivPoster.load(detailMovie.poster)
             tvTitle.text = detailMovie.title

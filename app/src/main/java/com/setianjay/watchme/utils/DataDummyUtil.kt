@@ -257,13 +257,13 @@ object DataDummyUtil {
 
         movies.add(
             MovieEntity(
-                85552L,
-                "Euphoria",
-                "/jtnfNzqZwN4E32FGGxx1YZaBWWf.jpg",
-                "A group of high school students navigate love and friendships in a world of drugs, sex, trauma, and social media.",
-                8.4F,
-                "16/06/2019",
-                "Drama"
+                110492L,
+                "Peacemaker",
+                "/hE3LRZAY84fG19a18pzpkZERjTE.jpg",
+                "The continuing story of Peacemaker – a compellingly vainglorious man who believes in peace at any cost, no matter how many people he has to kill to get it – in the aftermath of the events of \"The Suicide Squad.\"",
+                8.5F,
+                "13/01/2022",
+                "Action & Adventure, Comedy, Sci-Fi & Fantasy"
             )
         )
 

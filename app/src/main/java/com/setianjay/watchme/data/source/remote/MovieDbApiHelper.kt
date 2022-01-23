@@ -35,22 +35,23 @@ class MovieDbApiHelper(private val movieDbEndpoint: MovieDbEndpoint) {
 
     /* function helper to call each endpoint of api */
     fun getMoviesPopular(callback: LoadMoviesCallback) {
-        EspressoIdlingResources.increment()
         coroutineScope.launch {
+            EspressoIdlingResources.increment()
             try {
                 val dataResponse = movieDbEndpoint.getMoviePopular()
                 if (dataResponse.isSuccessful) {
                     val listMovies = dataResponse.body()?.moviesItem
                     if (listMovies != null) {
                         callback.onAllMoviesReceived(listMovies)
+                        EspressoIdlingResources.decrement()
                     }
-                    EspressoIdlingResources.decrement()
                 } else {
                     callback.onAllMoviesReceived(emptyList())
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 callback.onAllMoviesReceived(emptyList())
+                EspressoIdlingResources.decrement()
             }
         }
     }
@@ -64,46 +65,49 @@ class MovieDbApiHelper(private val movieDbEndpoint: MovieDbEndpoint) {
                     val listMovies = dataResponse.body()?.tv
                     if (listMovies != null) {
                         callback.onAllTvReceived(listMovies)
+                        EspressoIdlingResources.decrement()
                     }
-                    EspressoIdlingResources.decrement()
                 } else {
                     callback.onAllTvReceived(emptyList())
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 callback.onAllTvReceived(emptyList())
+                EspressoIdlingResources.decrement()
             }
         }
     }
 
     fun getMovieDetail(movieId: Long, callback: LoadMovieDetailCallback) {
-        EspressoIdlingResources.increment()
         coroutineScope.launch {
+            EspressoIdlingResources.increment()
             try {
                 val dataResponse = movieDbEndpoint.getMovieDetail(movieId)
                 if (dataResponse.isSuccessful) {
                     val detailMovie = dataResponse.body()
                     detailMovie?.let { callback.onMovieDetailReceived(it) }
+                    EspressoIdlingResources.decrement()
                 }
-                EspressoIdlingResources.decrement()
             } catch (e: Exception) {
                 e.printStackTrace()
+                EspressoIdlingResources.decrement()
             }
         }
     }
 
     fun getTvDetail(movieId: Long, callback: LoadTvDetailCallback) {
-        EspressoIdlingResources.increment()
         coroutineScope.launch {
+            EspressoIdlingResources.increment()
             try {
                 val dataResponse = movieDbEndpoint.getTvDetail(movieId)
                 if (dataResponse.isSuccessful) {
                     val detailMovie = dataResponse.body()
                     detailMovie?.let { callback.onTvDetailReceived(it) }
+                    EspressoIdlingResources.decrement()
                 }
-                EspressoIdlingResources.decrement()
             } catch (e: Exception) {
                 e.printStackTrace()
+                EspressoIdlingResources.decrement()
             }
         }
     }

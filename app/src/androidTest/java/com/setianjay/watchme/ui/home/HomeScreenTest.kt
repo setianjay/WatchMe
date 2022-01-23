@@ -111,7 +111,6 @@ class HomeScreenTest {
                 click()
             )
         )
-
         checkDetailContent(dummyTvShows)
     }
 
@@ -125,13 +124,12 @@ class HomeScreenTest {
     private fun checkDetailContent(movies: List<MovieEntity>){
         onView(withId(R.id.iv_poster)).check(matches(isDisplayed()))
         onView(withId(R.id.iv_bookmark)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_overview)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_title)).check(matches(withText(movies[0].title)))
         onView(withId(R.id.tv_genre)).check(matches(withText(movies[0].genre)))
         onView(withId(R.id.tv_release)).check(matches(withText(context.getString(R.string.release, movies[0].release))))
         onView(withId(R.id.tv_rating)).check(matches(withText(movies[0].rating.toString())))
-        onView(withId(R.id.tv_overview)).check(matches(withText(movies[0].overview)))
 
-        println(movies[0].genre.toString())
     }
 
     @After
