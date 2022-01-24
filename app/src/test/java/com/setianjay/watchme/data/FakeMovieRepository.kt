@@ -12,14 +12,9 @@ import com.setianjay.watchme.data.source.remote.response.DetailTvResponse
 import com.setianjay.watchme.data.source.remote.response.MovieResponse
 import com.setianjay.watchme.data.source.remote.response.TvResponse
 import com.setianjay.watchme.utils.DataDummyUtil
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 
 class FakeMovieRepository(private val apiHelper: MovieDbApiHelper) :
     IMovieDataSource {
-
-    //coroutineScope for handle background process
-    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     /**
      * to get list of movie popular
