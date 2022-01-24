@@ -87,7 +87,7 @@ class HomeScreenTest {
             )
         )
 
-        checkDetailContent(dummyMovies)
+        checkDetailContent()
     }
 
     /**
@@ -111,25 +111,23 @@ class HomeScreenTest {
                 click()
             )
         )
-        checkDetailContent(dummyTvShows)
+        checkDetailContent()
     }
 
     /**
-     * checking all view in detail screen based on movie data and position
+     * checking all view in detail screen
      *
-     * @param movies        data resources
      *
      * @output              success, if all checking for view has passed
      * */
-    private fun checkDetailContent(movies: List<MovieEntity>){
+    private fun checkDetailContent(){
         onView(withId(R.id.iv_poster)).check(matches(isDisplayed()))
         onView(withId(R.id.iv_bookmark)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_overview)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_title)).check(matches(withText(movies[0].title)))
-        onView(withId(R.id.tv_genre)).check(matches(withText(movies[0].genre)))
-        onView(withId(R.id.tv_release)).check(matches(withText(context.getString(R.string.release, movies[0].release))))
-        onView(withId(R.id.tv_rating)).check(matches(withText(movies[0].rating.toString())))
-
+        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_genre)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_release)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_rating)).check(matches(isDisplayed()))
     }
 
     @After
