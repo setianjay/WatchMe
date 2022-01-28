@@ -113,9 +113,11 @@ class ContentsFragment private constructor() : BaseFragment(),
     }
 
     /**
-     * when one of item in movies list has clicked, move them to DetailMovieFragment
+     * when one of item in movies list has clicked, move them to DetailMovieFragment.
      *
      * @param movieId id of movie
+     *
+     * note: this event listener from [ContentsAdapter.IOnContentsAdapterListener]
      * */
     override fun onClickItem(movieId: Long) {
         //send movie id and state of movie to DetailMovieFragment through SafeArgs
@@ -124,6 +126,11 @@ class ContentsFragment private constructor() : BaseFragment(),
             isMovies ?: false
         )
         findNavController().navigate(toDetailMovieFragment)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onDestroy() {
