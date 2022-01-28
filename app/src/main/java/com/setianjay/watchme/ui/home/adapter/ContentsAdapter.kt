@@ -3,11 +3,13 @@ package com.setianjay.watchme.ui.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.setianjay.watchme.R
 import com.setianjay.watchme.data.source.local.entity.MovieEntity
 import com.setianjay.watchme.databinding.ItemListContentBinding
 import com.setianjay.watchme.utils.FormatUtil
+import com.setianjay.watchme.utils.MovieDiffCallback
 import com.setianjay.watchme.utils.ViewUtil.load
 
 class ContentsAdapter(
@@ -17,11 +19,15 @@ class ContentsAdapter(
     private val contents: ArrayList<MovieEntity> = ArrayList()
 
     fun setContents(contents: List<MovieEntity>) {
+        val diffUtil = MovieDiffCallback(this.contents, contents)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
+
         this.contents.apply {
             clear()
             addAll(contents)
         }
-        notifyDataSetChanged()
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
     interface IOnContentsAdapterListener {
