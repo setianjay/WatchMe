@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_duration"
+        android:id="@+id/tv_release"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_24"
@@ -92,5 +92,5 @@
         android:textSize="@dimen/sp_12"
         app:layout_constraintStart_toEndOf="@id/parent_poster"
         app:layout_constraintTop_toBottomOf="@id/tv_genre"
-        tools:text="@string/duration_dummy"/>
+        tools:text="@string/release_dummy"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

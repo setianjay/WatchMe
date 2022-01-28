@@ -8,19 +8,25 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.setianjay.watchme.base.BaseFragment
+import com.setianjay.watchme.data.source.local.entity.MovieEntity
+import com.setianjay.watchme.data.source.remote.Resource
 import com.setianjay.watchme.databinding.FragmentContentsBinding
-import com.setianjay.watchme.model.Movies
 import com.setianjay.watchme.ui.home.HomeFragmentDirections
 import com.setianjay.watchme.ui.home.adapter.ContentsAdapter
-import com.setianjay.watchme.viewmodel.ContentsViewModel
+import com.setianjay.watchme.utils.ViewUtil.show
+import timber.log.Timber
 
-class ContentsFragment private constructor() : BaseFragment(), ContentsAdapter.IOnContentsAdapterListener {
+class ContentsFragment private constructor() : BaseFragment(),
+    ContentsAdapter.IOnContentsAdapterListener {
     private var _binding: FragmentContentsBinding? = null
     private val binding get() = _binding
 
-    private var isMovies: Boolean? = null
+    private val contentsViewModel by viewModels<ContentsViewModel> {
+        movieViewModelFactory
+    }
 
-    private val contentsViewModel by viewModels<ContentsViewModel>()
+    private var isMovies: Boolean? = null
+    private var movies: List<MovieEntity>? = null
 
     override fun onBindView(
         inflater: LayoutInflater,
@@ -33,6 +39,7 @@ class ContentsFragment private constructor() : BaseFragment(), ContentsAdapter.I
 
     override fun init() {
         specifyContent()
+        Timber.d("Init created")
     }
 
     /**
@@ -52,27 +59,78 @@ class ContentsFragment private constructor() : BaseFragment(), ContentsAdapter.I
      * @param isMovies if true the content is movies, otherwise tv shows
      * */
     private fun setupRecycleView(isMovies: Boolean) {
-        val contents: List<Movies> = contentsViewModel.getDataMovies(isMovies)
+        val contentsAdapter = ContentsAdapter(requireContext(), this)
 
-        val contentAdapter = ContentsAdapter(requireContext(), this).apply {
-            setContents(contents)
-        }
+        //get observer for content based on parameter
+        observer(isMovies, contentsAdapter)
+
         binding?.rvContent?.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = contentAdapter
+            adapter = contentsAdapter
             setHasFixedSize(true)
         }
     }
 
     /**
-     * when one of item in movies list has clicked, move them to DetailMovieFragment
+     * to obtain data from observer
      *
-     * @param position position of item
+     * @param isMovies      if true the data is movie popular, otherwise tv popular
      * */
-    override fun onClickItem(position: Int) {
-        //send position and state of movie to DetailMovieFragment through SafeArgs
-        val toDetailMovieFragment = HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(position, isMovies ?: false)
+    private fun observer(isMovies: Boolean, adapter: ContentsAdapter) {
+        if (isMovies) {
+            contentsViewModel.getDataMovies().observe(viewLifecycleOwner) { response ->
+                when (response.statusType) {
+                    Resource.StatusType.LOADING -> {
+                        binding?.pbLoading?.show(true)
+                    }
+                    Resource.StatusType.SUCCESS -> {
+                        binding?.pbLoading?.show(false)
+                        movies = response?.data
+                        movies?.let { adapter.setContents(it) }
+                    }
+                    Resource.StatusType.ERROR -> {
+                        binding?.pbLoading?.show(false)
+                    }
+                }
+            }
+        } else {
+            contentsViewModel.getTvMovie().observe(viewLifecycleOwner) { response ->
+                when (response.statusType) {
+                    Resource.StatusType.LOADING -> {
+                        binding?.pbLoading?.show(true)
+                    }
+                    Resource.StatusType.SUCCESS -> {
+                        binding?.pbLoading?.show(false)
+                        movies = response?.data
+                        movies?.let { adapter.setContents(it) }
+                    }
+                    Resource.StatusType.ERROR -> {
+                        binding?.pbLoading?.show(false)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * when one of item in movies list has clicked, move them to DetailMovieFragment.
+     *
+     * @param movieId id of movie
+     *
+     * note: this event listener from [ContentsAdapter.IOnContentsAdapterListener]
+     * */
+    override fun onClickItem(movieId: Long) {
+        //send movie id and state of movie to DetailMovieFragment through SafeArgs
+        val toDetailMovieFragment = HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(
+            movieId,
+            isMovies ?: false
+        )
         findNavController().navigate(toDetailMovieFragment)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onDestroy() {
