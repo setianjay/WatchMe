@@ -17,7 +17,7 @@ buildscript {
         fragmentTestVersion = "1.4.0"
         idlingVersion = "3.0.2"
         junitVersion = '4.13.2'
-        mockitoVersion = '3.6.0'
+        mockitoVersion = '4.2.0'
         mockitoKotlinVersion = '2.2.0'
         navigationTestVersion = "2.3.5"
         rulesVersion = "1.4.0"
@@ -27,11 +27,11 @@ buildscript {
         /* ui */
         appCompatVersion = '1.4.1'
         circleImageVersion = "3.1.0"
-        constraintLayoutVersion = "2.1.2"
+        constraintLayoutVersion = "2.1.3"
         glideVersion = "4.12.0"
         legacySupportVersion = "1.0.0"
         lottieVersion = '4.2.2'
-        materialVersion = "1.4.0"
+        materialVersion = "1.5.0"
         navigationVersion = "2.3.5"
 
         /* view model */
