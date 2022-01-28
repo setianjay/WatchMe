@@ -1,5 +1,6 @@
 package com.setianjay.watchme.data.source.remote.retrofit
 
+import com.airbnb.lottie.BuildConfig
 import com.setianjay.watchme.data.source.remote.constant.RemoteConst
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,8 +15,10 @@ object MovieDbApiBuilder {
      * @return      endpoint of movie db API
      * */
     fun getApiService(): MovieDbEndpoint{
-        val interceptor = HttpLoggingInterceptor().apply {
-            setLevel(HttpLoggingInterceptor.Level.BODY)
+        val interceptor = if(BuildConfig.DEBUG){
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        }else{
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
         }
 
         val client = OkHttpClient.Builder()
