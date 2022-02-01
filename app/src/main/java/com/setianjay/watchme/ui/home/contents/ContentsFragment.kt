@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.setianjay.watchme.base.BaseFragment
 import com.setianjay.watchme.data.source.local.entity.MovieEntity
@@ -14,7 +15,6 @@ import com.setianjay.watchme.databinding.FragmentContentsBinding
 import com.setianjay.watchme.ui.home.HomeFragmentDirections
 import com.setianjay.watchme.ui.home.adapter.ContentsAdapter
 import com.setianjay.watchme.utils.ViewUtil.show
-import timber.log.Timber
 
 class ContentsFragment private constructor() : BaseFragment(),
     ContentsAdapter.IOnContentsAdapterListener {
@@ -26,7 +26,7 @@ class ContentsFragment private constructor() : BaseFragment(),
     }
 
     private var isMovies: Boolean? = null
-    private var movies: List<MovieEntity>? = null
+    private var movies: PagedList<MovieEntity>? = null
 
     override fun onBindView(
         inflater: LayoutInflater,
@@ -39,7 +39,6 @@ class ContentsFragment private constructor() : BaseFragment(),
 
     override fun init() {
         specifyContent()
-        Timber.d("Init created")
     }
 
     /**
@@ -85,8 +84,8 @@ class ContentsFragment private constructor() : BaseFragment(),
                     }
                     Resource.StatusType.SUCCESS -> {
                         binding?.pbLoading?.show(false)
-                        movies = response?.data
-                        movies?.let { adapter.setContents(it) }
+                        movies = response.data
+                        adapter.submitList(movies)
                     }
                     Resource.StatusType.ERROR -> {
                         binding?.pbLoading?.show(false)
@@ -101,8 +100,8 @@ class ContentsFragment private constructor() : BaseFragment(),
                     }
                     Resource.StatusType.SUCCESS -> {
                         binding?.pbLoading?.show(false)
-                        movies = response?.data
-                        movies?.let { adapter.setContents(it) }
+                        movies = response.data
+                        adapter.submitList(movies)
                     }
                     Resource.StatusType.ERROR -> {
                         binding?.pbLoading?.show(false)
@@ -122,8 +121,7 @@ class ContentsFragment private constructor() : BaseFragment(),
     override fun onClickItem(movieId: Long) {
         //send movie id and state of movie to DetailMovieFragment through SafeArgs
         val toDetailMovieFragment = HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(
-            movieId,
-            isMovies ?: false
+            movieId
         )
         findNavController().navigate(toDetailMovieFragment)
     }

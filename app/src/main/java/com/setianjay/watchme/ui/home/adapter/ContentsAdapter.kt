@@ -3,32 +3,19 @@ package com.setianjay.watchme.ui.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.setianjay.watchme.R
 import com.setianjay.watchme.data.source.local.entity.MovieEntity
 import com.setianjay.watchme.databinding.ItemListContentBinding
 import com.setianjay.watchme.utils.FormatUtil
-import com.setianjay.watchme.utils.MovieDiffCallback
 import com.setianjay.watchme.utils.ViewUtil.load
 
 class ContentsAdapter(
     private val context: Context,
     private val listener: IOnContentsAdapterListener
-) : RecyclerView.Adapter<ContentsAdapter.ViewHolder>() {
-    private val contents: ArrayList<MovieEntity> = ArrayList()
-
-    fun setContents(contents: List<MovieEntity>) {
-        val diffUtil = MovieDiffCallback(this.contents, contents)
-        val diffResult = DiffUtil.calculateDiff(diffUtil)
-
-        this.contents.apply {
-            clear()
-            addAll(contents)
-        }
-
-        diffResult.dispatchUpdatesTo(this)
-    }
+) : PagedListAdapter<MovieEntity, ContentsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     interface IOnContentsAdapterListener {
         fun onClickItem(movieId: Long)
@@ -45,12 +32,10 @@ class ContentsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val content = contents[position]
-        holder.bind(content)
-    }
-
-    override fun getItemCount(): Int {
-        return contents.size
+        val content = getItem(position)
+        if (content != null) {
+            holder.bind(content)
+        }
     }
 
     inner class ViewHolder(private val binding: ItemListContentBinding) :
@@ -61,7 +46,8 @@ class ContentsAdapter(
                 rating.rating = movie.rating
                 tvRating.text = "${movie.rating}"
                 tvGenre.text = FormatUtil.genreFormat(movie.genre)
-                tvRelease.text = context.getString(R.string.release, FormatUtil.dateFormat(movie.release))
+                tvRelease.text =
+                    context.getString(R.string.release, FormatUtil.dateFormat(movie.release))
 
                 ivPoster.load(movie.poster)
 
@@ -69,6 +55,19 @@ class ContentsAdapter(
                     listener.onClickItem(movie.movieId)
                 }
             }
+        }
+    }
+
+    companion object{
+        private val DIFF_CALLBACK = object: DiffUtil.ItemCallback<MovieEntity>(){
+            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+                return oldItem.movieId == newItem.movieId
+            }
+
+            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+                return oldItem == newItem
+            }
+
         }
     }
 }

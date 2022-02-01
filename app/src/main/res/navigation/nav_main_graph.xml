@@ -35,8 +35,5 @@
         <argument
             android:name="movieId"
             app:argType="long" />
-        <argument
-            android:name="isMovies"
-            app:argType="boolean" />
     </fragment>
 </navigation>
