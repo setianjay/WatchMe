@@ -14,4 +14,8 @@ interface IMovieDataSource {
     fun getMovieDetail(movieId: Long): LiveData<MovieEntity>
 
     fun setFavorite(movieEntity: MovieEntity)
+
+    fun getAllMovieBookmarked(): LiveData<PagedList<MovieEntity>>
+
+    fun getAllTvBookmarked(): LiveData<PagedList<MovieEntity>>
 }

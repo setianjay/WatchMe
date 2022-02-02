@@ -136,6 +136,37 @@ class MovieRepository private constructor(
         BackgroundUtil.coroutineScope.launch { localDataSource.updateMovie(movieEntity) }
     }
 
+    /**
+     * to get all movie bookmarked
+     *
+     * @return          LiveData<PagedList<MovieEntity>>
+     * */
+    override fun getAllMovieBookmarked(): LiveData<PagedList<MovieEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setPageSize(4)
+            .setInitialLoadSizeHint(20)
+            .build()
+
+        return LivePagedListBuilder(localDataSource.getAllMovieBookmarked(), config).build()
+    }
+
+    /**
+     * to get all tv bookmarked
+     *
+     * @return          LiveData<PagedList<MovieEntity>>
+     * */
+    override fun getAllTvBookmarked(): LiveData<PagedList<MovieEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setPageSize(4)
+            .setInitialLoadSizeHint(20)
+            .build()
+
+        return LivePagedListBuilder(localDataSource.getAllTvBookmarked(), config).build()
+    }
+
+
     companion object {
         private var INSTANCE: MovieRepository? = null
 

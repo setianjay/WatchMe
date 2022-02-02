@@ -2,8 +2,12 @@ package com.setianjay.watchme.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.setianjay.watchme.R
 import com.setianjay.watchme.base.BaseFragment
@@ -26,10 +30,11 @@ class HomeFragment : BaseFragment() {
 
     override fun init() {
         setupTabLayout()
+        initListener()
     }
 
     /**
-     * setup between tab layout and view pager2
+     * setup tab layout and view pager2
      * */
     private fun setupTabLayout() {
         val viewPagerAdapter = ViewPagerHomeAdapter(childFragmentManager, lifecycle)
@@ -46,6 +51,30 @@ class HomeFragment : BaseFragment() {
                 }.attach()
             }
         }
+    }
+
+    private fun initListener() {
+        binding?.ivMenu?.setOnClickListener {
+            showPopupMenu()
+        }
+    }
+
+    /**
+     * show popup menu
+     * */
+    private fun showPopupMenu() {
+        val popupMenu = PopupMenu(requireContext(), binding?.ivMenu).apply {
+            menuInflater.inflate(R.menu.home_menu, this.menu)
+        }
+
+        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem? ->
+            if (menuItem?.itemId == R.id.action_menu_fav_movie){
+                findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
+            }
+            true
+        }
+
+        popupMenu.show()
     }
 
     override fun onDestroyView() {

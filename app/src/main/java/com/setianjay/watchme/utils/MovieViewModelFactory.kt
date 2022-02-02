@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.setianjay.watchme.data.repository.MovieRepository
 import com.setianjay.watchme.ui.detail.DetailViewModel
+import com.setianjay.watchme.ui.favorite.contents.ContentsFavoriteViewModel
 import com.setianjay.watchme.ui.home.contents.ContentsViewModel
 
 class MovieViewModelFactory private constructor(private val movieRepository: MovieRepository) :
@@ -16,6 +17,9 @@ class MovieViewModelFactory private constructor(private val movieRepository: Mov
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(movieRepository) as T
+            }
+            modelClass.isAssignableFrom(ContentsFavoriteViewModel::class.java) -> {
+                ContentsFavoriteViewModel(movieRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class ${modelClass.name}")
         }

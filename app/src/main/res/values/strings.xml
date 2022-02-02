@@ -18,6 +18,7 @@
     <string name="release">Release: %s</string>
     <string name="filter_image">Image Filters</string>
     <string name="hello_username">Hello, Vinsmoke Sanji</string>
+    <string name="menu_movie_favorite">Favorite</string>
     <string name="menus_image">Image Menus</string>
     <string name="poster_image">Poster Image</string>
     <string name="search_hint">Search for a movies in here</string>
@@ -35,6 +36,11 @@
     </string>
     <string name="overview">Overview</string>
     <string name="remove_favorite">Remove movie from favorite</string>
+
+    <!-- favorite movie fragment -->
+    <string name="favorite">Favorite</string>
+    <string name="you_don_t_have_favorite_movie_yet">You don\'t have favorite movie yet</string>
+    <string name="add_favorite_movie_on_detail_screen">Add favorite movie on detail screen</string>
 
     <!-- dummies -->
     <string name="release_dummy">Release: 15–12–2021</string>
