@@ -166,6 +166,16 @@ class MovieRepository private constructor(
         return LivePagedListBuilder(localDataSource.getAllTvBookmarked(), config).build()
     }
 
+    /**
+     * to get data based on search
+     *
+     * @param movieTitle    title of movie
+     * @return              LiveData<List<MovieEntity>>
+     * */
+    override fun searchMovie(movieTitle: String): LiveData<List<MovieEntity>> {
+        return localDataSource.searchMovie(movieTitle)
+    }
+
 
     companion object {
         private var INSTANCE: MovieRepository? = null

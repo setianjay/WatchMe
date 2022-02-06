@@ -18,4 +18,6 @@ interface IMovieDataSource {
     fun getAllMovieBookmarked(): LiveData<PagedList<MovieEntity>>
 
     fun getAllTvBookmarked(): LiveData<PagedList<MovieEntity>>
+
+    fun searchMovie(movieTitle: String): LiveData<List<MovieEntity>>
 }

@@ -23,6 +23,9 @@ interface MovieDao {
     @Query("SELECT * FROM tbl_movie WHERE movie_id = :movieId")
     fun getDetailMovie(movieId: Long): LiveData<MovieEntity>
 
+    @Query("SELECT * FROM tbl_movie WHERE title LIKE :movieTitle")
+    fun searchMovie(movieTitle: String): LiveData<List<MovieEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovies(movies: List<MovieEntity>)
 

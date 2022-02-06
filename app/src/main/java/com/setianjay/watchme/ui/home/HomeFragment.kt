@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.setianjay.watchme.R
@@ -15,7 +14,7 @@ import com.setianjay.watchme.databinding.FragmentHomeBinding
 import com.setianjay.watchme.ui.home.adapter.ViewPagerHomeAdapter
 
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(), View.OnClickListener {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
 
@@ -53,9 +52,22 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    /**
+     * for init all listener in fragment
+     * */
     private fun initListener() {
-        binding?.ivMenu?.setOnClickListener {
-            showPopupMenu()
+        binding?.ivMenu?.setOnClickListener(this)
+        binding?.tvSearch?.setOnClickListener(this)
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0?.id){
+            R.id.iv_menu -> {
+                showPopupMenu()
+            }
+            R.id.tv_search -> {
+                findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+            }
         }
     }
 

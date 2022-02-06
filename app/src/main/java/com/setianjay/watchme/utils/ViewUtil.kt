@@ -1,11 +1,25 @@
 package com.setianjay.watchme.utils
 
+import android.app.Activity
+import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.setianjay.watchme.data.source.remote.constant.RemoteConst
 
 object ViewUtil {
+
+    /**
+     * hide keyboard
+     *
+     * @param view          view
+     **/
+    fun Context.hideKeyboard(view: View){
+        val imm: InputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 
     /**
      * Image loader with glide

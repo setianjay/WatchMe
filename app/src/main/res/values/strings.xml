@@ -42,6 +42,11 @@
     <string name="you_don_t_have_favorite_movie_yet">You don\'t have favorite movie yet</string>
     <string name="add_favorite_movie_on_detail_screen">Add favorite movie on detail screen</string>
 
+    <!-- search movie screen -->
+    <string name="movie_not_found">Movie or tv show not found</string>
+    <string name="note_this_search_use_local_data_not_api">Note: This search use local data not API</string>
+    <string name="waiting_to_search">Waiting to search</string>
+
     <!-- dummies -->
     <string name="release_dummy">Release: 15–12–2021</string>
     <string name="genre_dummy">Adventure, Thriller, Comedy</string>

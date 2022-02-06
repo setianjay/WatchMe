@@ -9,7 +9,7 @@
         android:bottom="-1dp"/>
 
     <item
-        android:drawable="@drawable/ic_filter"
+        android:drawable="@drawable/ic_search"
         android:left="@dimen/dp_10"
         android:top="@dimen/dp_10"
         android:right="@dimen/dp_10"
