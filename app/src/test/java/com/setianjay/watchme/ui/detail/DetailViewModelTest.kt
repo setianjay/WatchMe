@@ -8,7 +8,6 @@ import com.setianjay.watchme.data.repository.MovieRepository
 import com.setianjay.watchme.data.source.local.entity.MovieEntity
 import com.setianjay.watchme.util.TestUtil
 import com.setianjay.watchme.utils.DataDummyUtil
-import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
 import org.junit.FixMethodOrder
