@@ -1,17 +1,21 @@
 package com.setianjay.watchme.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.doAnswer
-import com.nhaarman.mockitokotlin2.eq
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import com.nhaarman.mockitokotlin2.verify
+import com.setianjay.watchme.data.source.local.LocalDataSource
+import com.setianjay.watchme.data.source.local.entity.MovieEntity
 import com.setianjay.watchme.data.source.remote.MovieDbApiHelper
+import com.setianjay.watchme.data.source.remote.Resource
 import com.setianjay.watchme.util.LiveDataUtil
+import com.setianjay.watchme.util.PagedListUtil
+import com.setianjay.watchme.util.TestUtil
 import com.setianjay.watchme.utils.DataDummyUtil
-import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 
 class MovieRepositoryTest {
@@ -19,87 +23,96 @@ class MovieRepositoryTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val apiHelper = mock(MovieDbApiHelper::class.java)
-    private val movieRepository = FakeMovieRepository(apiHelper)
+    private val remote = mock(MovieDbApiHelper::class.java)
+    private val local = mock(LocalDataSource::class.java)
+    private val movieRepository = FakeMovieRepository(remote, local)
 
     //dummy data
     private val movieResponse = DataDummyUtil.generateRemoteDataMovies()
     private val tvResponse = DataDummyUtil.generateRemoteDataTv()
 
     private val movieId = movieResponse[0].movieId
-    private val tvId = tvResponse[0].tvId
 
-    private val movieDetail = DataDummyUtil.generateRemoteDetailMovie()
-    private val tvDetail = DataDummyUtil.generateRemoteDetailTv()
+    private val movieTitle = movieResponse[0].title
 
-
+    private val movieDetail = DataDummyUtil.getDetailMovie()
 
     @Test
     fun getMoviePopular() {
-        doAnswer { invocation ->
-            (invocation.arguments[0] as MovieDbApiHelper.LoadMoviesCallback)
-                .onAllMoviesReceived(movieResponse)
-            null
-        }.`when`(apiHelper).getMoviesPopular(any())
+        val dataSource = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(local.getAllMovies()).thenReturn(dataSource)
+        local.getAllMovies()
 
-        val movies = LiveDataUtil.getValue(movieRepository.getMoviesPopular()).data
-        verify(apiHelper).getMoviesPopular(any())
-        assertNotNull(movies)
-        assertEquals(movieResponse.size.toLong(), movies?.size?.toLong())
+        val movieEntity = Resource.success(PagedListUtil.mockPagedList(movieResponse)).data
+        verify(local).getAllMovies()
+        assertNotNull(movieEntity)
+        movieEntity?.let { TestUtil.checkMoviesDataSize(movieResponse, it) }
     }
-
 
     @Test
     fun getTvPopular() {
-        doAnswer { invocation ->
-            (invocation.arguments[0] as MovieDbApiHelper.LoadTvCallback)
-                .onAllTvReceived(tvResponse)
-            null
-        }.`when`(apiHelper).getTvPopular(any())
+        val dataSource = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(local.getAllTv()).thenReturn(dataSource)
+        local.getAllTv()
 
-        val movies = LiveDataUtil.getValue(movieRepository.getTvPopular()).data
-        verify(apiHelper).getTvPopular(any())
-        assertNotNull(movies)
-        assertEquals(tvResponse.size.toLong(), movies?.size?.toLong())
+        val movieEntity = Resource.success(PagedListUtil.mockPagedList(tvResponse)).data
+        verify(local).getAllTv()
+        assertNotNull(movieEntity)
+        movieEntity?.let { TestUtil.checkMoviesDataSize(tvResponse, it) }
     }
 
 
     @Test
-    fun getDetailMovie() {
-        doAnswer { invocation ->
-            (invocation.arguments[1] as MovieDbApiHelper.LoadMovieDetailCallback)
-                .onMovieDetailReceived(movieDetail)
-            null
-        }.`when`(apiHelper).getMovieDetail(eq(movieId), any())
+    fun getMovieDetail() {
+        val result = MutableLiveData<MovieEntity>()
+        result.value = movieDetail
+        `when`(local.getDetailMovie(movieId)).thenReturn(result)
 
-        val detailMovie = LiveDataUtil.getValue(movieRepository.getMovieDetail(movieId)).data
-        verify(apiHelper).getMovieDetail(eq(movieId), any())
+        val detailMovie = LiveDataUtil.getValue(movieRepository.getMovieDetail(movieId))
+        verify(local).getDetailMovie(movieId)
+
         assertNotNull(detailMovie)
-        assertEquals(movieDetail.movieId, detailMovie?.movieId)
-        assertEquals(movieDetail.title, detailMovie?.title)
-        assertEquals(movieDetail.poster, detailMovie?.poster)
-        assertEquals(movieDetail.overview, detailMovie?.overview)
-        assertEquals(movieDetail.rating, detailMovie?.rating)
-        assertEquals(movieDetail.releaseDate, detailMovie?.release)
+        TestUtil.checkSpecificMovie(movieDetail, detailMovie)
     }
 
     @Test
-    fun getDetailTv() {
-        doAnswer { invocation ->
-            (invocation.arguments[1] as MovieDbApiHelper.LoadTvDetailCallback)
-                .onTvDetailReceived(tvDetail)
-            null
-        }.`when`(apiHelper).getTvDetail(eq(tvId), any())
+    fun getAllMovieBookmarked(){
+        val dataSource = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(local.getAllMovieBookmarked()).thenReturn(dataSource)
+        local.getAllMovieBookmarked()
 
-        val detailTv = LiveDataUtil.getValue(movieRepository.getTvDetail(tvId)).data
-        verify(apiHelper).getTvDetail(eq(tvId), any())
-        assertNotNull(detailTv)
-        assertEquals(tvDetail.tvId, detailTv?.movieId)
-        assertEquals(tvDetail.title, detailTv?.title)
-        assertEquals(tvDetail.poster, detailTv?.poster)
-        assertEquals(tvDetail.overview, detailTv?.overview)
-        assertEquals(tvDetail.rating, detailTv?.rating)
-        assertEquals(tvDetail.releaseDate, detailTv?.release)
+        val movieEntity = Resource.success(PagedListUtil.mockPagedList(movieResponse)).data
+        verify(local).getAllMovieBookmarked()
+        assertNotNull(movieEntity)
+        movieEntity?.let { TestUtil.checkMoviesDataSize(movieResponse, it) }
     }
 
+    @Test
+    fun getAllTvBookmarked(){
+        val dataSource = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(local.getAllMovieBookmarked()).thenReturn(dataSource)
+        local.getAllMovieBookmarked()
+
+        val movieEntity = Resource.success(PagedListUtil.mockPagedList(tvResponse)).data
+        verify(local).getAllMovieBookmarked()
+        assertNotNull(movieEntity)
+        movieEntity?.let{ TestUtil.checkMoviesDataSize(tvResponse, it) }
+    }
+
+    @Test
+    fun searchMovie(){
+        val dummySearch: List<MovieEntity> = listOf(movieDetail)
+
+        val result = MutableLiveData<List<MovieEntity>>()
+        result.value = dummySearch
+
+        `when`(local.searchMovie(movieTitle)).thenReturn(result)
+        local.searchMovie(movieTitle)
+
+        val searchResult = LiveDataUtil.getValue(result)[0]
+        verify(local).searchMovie(movieTitle)
+
+        assertNotNull(searchResult)
+        TestUtil.checkSpecificMovie(movieDetail, searchResult)
+    }
 }
