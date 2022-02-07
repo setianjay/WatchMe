@@ -34,8 +34,11 @@ class FavoriteScreenTest {
      * @output      display image information
      * */
     @Test
-    fun showEmptyFavoriteMovie(){
+    fun showEmptyFavoriteMovie() {
         favoriteMovie()
+        onView(withId(R.id.iv_information)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_message)).check(matches(isDisplayed()))
     }
 
     /**
@@ -44,8 +47,11 @@ class FavoriteScreenTest {
      * @output      display image information
      * */
     @Test
-    fun showEmptyFavoriteTv(){
+    fun showEmptyFavoriteTv() {
         favoriteTv()
+        onView(withId(R.id.iv_information)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_message)).check(matches(isDisplayed()))
     }
 
     /**
@@ -70,6 +76,7 @@ class FavoriteScreenTest {
         pressBack()
 
         favoriteMovie()
+        onView(withId(R.id.rv_favorite)).check(matches(isDisplayed()))
     }
 
     /**
@@ -79,8 +86,8 @@ class FavoriteScreenTest {
      * */
     @Test
     fun showFavoriteTv() {
-        onView(withText(R.string.categories_tv_shows)).perform(click())
         onView(withText(R.string.categories_tv_shows)).check(matches(isDisplayed()))
+        onView(withText(R.string.categories_tv_shows)).perform(click())
         val position = 0
         onView(withId(R.id.rv_content)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
@@ -94,7 +101,8 @@ class FavoriteScreenTest {
         onView(withId(R.id.iv_bookmark)).perform(click())
         pressBack()
 
-       favoriteTv()
+        favoriteTv()
+        onView(withId(R.id.rv_favorite)).check(matches(isDisplayed()))
     }
 
     /**
@@ -103,7 +111,7 @@ class FavoriteScreenTest {
      * @output      display detail of movie
      * */
     @Test
-    fun showFavoriteMovieThenToDetail(){
+    fun showFavoriteMovieThenToDetail() {
         favoriteMovie()
 
         val position = 0
@@ -123,7 +131,7 @@ class FavoriteScreenTest {
      * @output      display detail of movie
      * */
     @Test
-    fun showFavoriteTvThenToDetail(){
+    fun showFavoriteTvThenToDetail() {
         favoriteTv()
 
         val position = 0
@@ -137,16 +145,16 @@ class FavoriteScreenTest {
         DetailScreenTest.checkDetailContent()
     }
 
-    companion object{
+    companion object {
 
-        private fun favoriteMovie(){
+        private fun favoriteMovie() {
             onView(withId(R.id.iv_menu)).perform(click())
             onView(withText(R.string.menu_movie_favorite)).check(matches(isDisplayed()))
             onView(withText(R.string.menu_movie_favorite)).perform(click())
             onView(withText(R.string.categories_movies)).check(matches(isDisplayed()))
         }
 
-        private fun favoriteTv(){
+        private fun favoriteTv() {
             onView(withId(R.id.iv_menu)).perform(click())
             onView(withText(R.string.menu_movie_favorite)).check(matches(isDisplayed()))
             onView(withText(R.string.menu_movie_favorite)).perform(click())

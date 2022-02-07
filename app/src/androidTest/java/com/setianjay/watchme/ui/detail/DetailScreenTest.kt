@@ -98,7 +98,7 @@ class DetailScreenTest {
      * @output image bookmark on detail screen changes to be [R.drawable.ic_bookmark_not_selected]
      * */
     @Test
-    fun showDetailMovieAndRemoveToFavorite() {
+    fun showDetailMovieAndRemoveFromFavorite() {
         showDetailMovie()
         onView(withId(R.id.iv_bookmark)).perform(click())
     }
@@ -121,7 +121,7 @@ class DetailScreenTest {
      * @output image bookmark on detail screen changes to be [R.drawable.ic_bookmark_not_selected]
      * */
     @Test
-    fun showDetailTvShowsAndRemoveToFavorite() {
+    fun showDetailTvShowsAndRemoveFromFavorite() {
         showDetailTvShow()
         onView(withId(R.id.iv_bookmark)).perform(click())
     }
