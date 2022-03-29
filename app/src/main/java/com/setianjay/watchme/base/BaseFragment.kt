@@ -9,8 +9,10 @@ import com.setianjay.watchme.utils.Injection
 import com.setianjay.watchme.utils.MovieViewModelFactory
 
 abstract class BaseFragment : Fragment() {
+    private val appContext get() = requireActivity().applicationContext
+
     protected val movieViewModelFactory get() =
-        MovieViewModelFactory.getInstance(Injection.provideMovieRepository())
+        MovieViewModelFactory.getInstance(Injection.provideMovieRepository(appContext))
 
     /**
      * bind view of fragment

@@ -1,7 +1,7 @@
 package com.setianjay.watchme.data.source.remote
 
-import com.setianjay.watchme.data.source.remote.response.DetailMovieResponse
-import com.setianjay.watchme.data.source.remote.response.DetailTvResponse
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.setianjay.watchme.data.source.remote.response.MovieResponse
 import com.setianjay.watchme.data.source.remote.response.TvResponse
 import com.setianjay.watchme.data.source.remote.retrofit.MovieDbEndpoint
@@ -16,25 +16,10 @@ class MovieDbApiHelper(private val movieDbEndpoint: MovieDbEndpoint) {
     //coroutine for running background task
     private val coroutineScope = BackgroundUtil.coroutineScope
 
-    /* interface for handle callback data */
-    interface LoadMoviesCallback {
-        fun onAllMoviesReceived(movies: List<MovieResponse.MovieItem>)
-    }
-
-    interface LoadTvCallback {
-        fun onAllTvReceived(tv: List<TvResponse.TvItem>)
-    }
-
-    interface LoadMovieDetailCallback {
-        fun onMovieDetailReceived(movie: DetailMovieResponse)
-    }
-
-    interface LoadTvDetailCallback {
-        fun onTvDetailReceived(tv: DetailTvResponse)
-    }
-
     /* function helper to call each endpoint of api */
-    fun getMoviesPopular(callback: LoadMoviesCallback) {
+    fun getMoviesPopular(): LiveData<ApiResponse<List<MovieResponse.MovieItem>>> {
+        val result = MutableLiveData<ApiResponse<List<MovieResponse.MovieItem>>>()
+
         coroutineScope.launch {
             EspressoIdlingResources.increment()
             try {
@@ -42,21 +27,25 @@ class MovieDbApiHelper(private val movieDbEndpoint: MovieDbEndpoint) {
                 if (dataResponse.isSuccessful) {
                     val listMovies = dataResponse.body()?.moviesItem
                     if (listMovies != null) {
-                        callback.onAllMoviesReceived(listMovies)
+                        result.postValue(ApiResponse.success(listMovies))
                         EspressoIdlingResources.decrement()
                     }
                 } else {
-                    callback.onAllMoviesReceived(emptyList())
+                    result.postValue(ApiResponse.error("No data", emptyList()))
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                callback.onAllMoviesReceived(emptyList())
+                result.postValue(ApiResponse.error("No data", emptyList()))
                 EspressoIdlingResources.decrement()
             }
         }
+
+        return result
     }
 
-    fun getTvPopular(callback: LoadTvCallback) {
+    fun getTvPopular(): LiveData<ApiResponse<List<TvResponse.TvItem>>> {
+        val result = MutableLiveData<ApiResponse<List<TvResponse.TvItem>>>()
+
         coroutineScope.launch {
             EspressoIdlingResources.increment()
             try {
@@ -64,52 +53,20 @@ class MovieDbApiHelper(private val movieDbEndpoint: MovieDbEndpoint) {
                 if (dataResponse.isSuccessful) {
                     val listMovies = dataResponse.body()?.tv
                     if (listMovies != null) {
-                        callback.onAllTvReceived(listMovies)
+                        result.postValue(ApiResponse.success(listMovies))
                         EspressoIdlingResources.decrement()
                     }
                 } else {
-                    callback.onAllTvReceived(emptyList())
+                    result.postValue(ApiResponse.error("No data", emptyList()))
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                callback.onAllTvReceived(emptyList())
+                result.postValue(ApiResponse.error("No data", emptyList()))
                 EspressoIdlingResources.decrement()
             }
         }
-    }
 
-    fun getMovieDetail(movieId: Long, callback: LoadMovieDetailCallback) {
-        coroutineScope.launch {
-            EspressoIdlingResources.increment()
-            try {
-                val dataResponse = movieDbEndpoint.getMovieDetail(movieId)
-                if (dataResponse.isSuccessful) {
-                    val detailMovie = dataResponse.body()
-                    detailMovie?.let { callback.onMovieDetailReceived(it) }
-                    EspressoIdlingResources.decrement()
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                EspressoIdlingResources.decrement()
-            }
-        }
-    }
-
-    fun getTvDetail(movieId: Long, callback: LoadTvDetailCallback) {
-        coroutineScope.launch {
-            EspressoIdlingResources.increment()
-            try {
-                val dataResponse = movieDbEndpoint.getTvDetail(movieId)
-                if (dataResponse.isSuccessful) {
-                    val detailMovie = dataResponse.body()
-                    detailMovie?.let { callback.onTvDetailReceived(it) }
-                    EspressoIdlingResources.decrement()
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                EspressoIdlingResources.decrement()
-            }
-        }
+        return result
     }
 
 }

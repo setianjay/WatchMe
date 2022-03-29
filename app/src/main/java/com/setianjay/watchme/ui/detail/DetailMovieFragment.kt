@@ -4,27 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.setianjay.watchme.R
 import com.setianjay.watchme.base.BaseFragment
 import com.setianjay.watchme.data.source.local.entity.MovieEntity
-import com.setianjay.watchme.data.source.remote.Resource
 import com.setianjay.watchme.databinding.FragmentDetailMovieBinding
-import com.setianjay.watchme.utils.DataDummyUtil
 import com.setianjay.watchme.utils.FormatUtil
 import com.setianjay.watchme.utils.ViewUtil.load
-import com.setianjay.watchme.utils.ViewUtil.show
 import timber.log.Timber
 
 class DetailMovieFragment : BaseFragment() {
     private var _binding: FragmentDetailMovieBinding? = null
     private val binding get() = _binding
 
-    private val detailViewModel by viewModels<DetailViewModel>{
+    private val detailViewModel by viewModels<DetailViewModel> {
         movieViewModelFactory
     }
-
-    private var detailMovie: MovieEntity? = null
 
     override fun onBindView(
         inflater: LayoutInflater,
@@ -44,62 +40,25 @@ class DetailMovieFragment : BaseFragment() {
      * */
     private fun showDetailMovie() {
         val movieId: Long
-        val isMovies: Boolean
 
         //get data from safeargs
         DetailMovieFragmentArgs.fromBundle(arguments as Bundle).apply {
             movieId = this.movieId
-            isMovies = this.isMovies
         }
 
         //get observer for detail movie based on movie id and is movies value
-        observe(movieId, isMovies)
-        Timber.d("overview: ${DataDummyUtil.generateDataTvShows()[0].overview}")
+        observe(movieId)
     }
 
     /**
      * to obtain data from observer
      *
      * @param movieId       id of movie
-     * @param isMovies      if true the data is detail of movie popular, otherwise detail of tv popular
      * */
-    private fun observe(movieId: Long, isMovies: Boolean){
-        if (isMovies){
-            detailViewModel.getMovieDetail(movieId).observe(viewLifecycleOwner){ response ->
-                when(response.statusType){
-                    Resource.StatusType.LOADING -> {
-                        binding?.pbLoading?.show(true)
-                        binding?.parentDetailContent?.show(false)
-                    }
-                    Resource.StatusType.SUCCESS -> {
-                        binding?.pbLoading?.show(false)
-                        binding?.parentDetailContent?.show(true)
-                        detailMovie = response?.data
-                        detailMovie?.let { populateData(it) }
-                    }
-                    Resource.StatusType.ERROR -> {
-                        binding?.pbLoading?.show(false)
-                    }
-                }
-            }
-        }else{
-            detailViewModel.getTvDetail(movieId).observe(viewLifecycleOwner){ response ->
-                when(response.statusType){
-                    Resource.StatusType.LOADING -> {
-                        binding?.pbLoading?.show(true)
-                        binding?.parentDetailContent?.show(false)
-                    }
-                    Resource.StatusType.SUCCESS -> {
-                        binding?.pbLoading?.show(false)
-                        binding?.parentDetailContent?.show(true)
-                        detailMovie = response?.data
-                        detailMovie?.let { populateData(it) }
-                    }
-                    Resource.StatusType.ERROR -> {
-                        binding?.pbLoading?.show(false)
-                    }
-                }
-            }
+    private fun observe(movieId: Long) {
+        detailViewModel.getMovieDetail(movieId).observe(viewLifecycleOwner) { response ->
+            Timber.d("observe movie run")
+            populateData(response)
         }
     }
 
@@ -108,16 +67,38 @@ class DetailMovieFragment : BaseFragment() {
      *
      * @param detailMovie       data of detail movie
      * */
-    private fun populateData(detailMovie: MovieEntity){
-        Timber.d("overview response: ${detailMovie.overview}")
+    private fun populateData(detailMovie: MovieEntity) {
+        val imageBookmark =
+            if (detailMovie.isFavorite) R.drawable.ic_bookmark_selected else R.drawable.ic_bookmark_not_selected
+
         binding?.apply {
             ivPoster.load(detailMovie.poster)
             tvTitle.text = detailMovie.title
             tvGenre.text = FormatUtil.genreFormat(detailMovie.genre)
-            tvRelease.text = resources.getString(R.string.release, FormatUtil.dateFormat(detailMovie.release))
+            tvRelease.text =
+                resources.getString(R.string.release, FormatUtil.dateFormat(detailMovie.release))
             rating.rating = detailMovie.rating
             tvRating.text = "${detailMovie.rating}"
             tvOverview.text = detailMovie.overview
+            ivBookmark.setImageResource(imageBookmark)
+        }
+
+        //set movie to favorite
+        binding?.ivBookmark?.setOnClickListener {
+            detailViewModel.setFavorite(detailMovie)
+            if (detailMovie.isFavorite) {
+                Toast.makeText(
+                    requireContext(),
+                    requireContext().getString(R.string.add_favorite),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                Toast.makeText(
+                    requireContext(),
+                    requireContext().getString(R.string.remove_favorite),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

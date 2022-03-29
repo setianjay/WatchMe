@@ -17,7 +17,8 @@ object DataDummyUtil {
                 "The Eternals are a team of ancient aliens who have been living on Earth in secret for thousands of years. When an unexpected tragedy forces them out of the shadows, they are forced to reunite against mankind’s most ancient enemy, the Deviants.",
                 7.3F,
                 "03/11/2021",
-                "Action, Adventure, Fantasy, Science Fiction"
+                "Action, Adventure, Fantasy, Science Fiction",
+                true
             )
         )
 
@@ -29,7 +30,8 @@ object DataDummyUtil {
                 "Buster and his new cast now have their sights set on debuting a new show at the Crystal Tower Theater in glamorous Redshore City. But with no connections, he and his singers must sneak into the Crystal Entertainment offices, run by the ruthless wolf mogul Jimmy Crystal, where the gang pitches the ridiculous idea of casting the lion rock legend Clay Calloway in their show. Buster must embark on a quest to find the now-isolated Clay and persuade him to return to the stage.",
                 8.2F,
                 "01/12/2021",
-                "Animation, Comedy, Family, Music"
+                "Animation, Comedy, Family, Music",
+                true
             )
         )
 
@@ -41,7 +43,8 @@ object DataDummyUtil {
                 "When a single mom and her two kids arrive in a small town, they begin to discover their connection to the original Ghostbusters and the secret legacy their grandfather left behind.",
                 7.6F,
                 "11/11/2021",
-                "Comedy, Fantasy, Adventure"
+                "Comedy, Fantasy, Adventure",
+                true
             )
         )
 
@@ -53,7 +56,8 @@ object DataDummyUtil {
                 "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
                 8.4F,
                 "15/12/2021",
-                "Action, Adventure, Science Fiction"
+                "Action, Adventure, Science Fiction",
+                true
             )
         )
 
@@ -65,7 +69,8 @@ object DataDummyUtil {
                 "The tale of an extraordinary family, the Madrigals, who live hidden in the mountains of Colombia, in a magical house, in a vibrant town, in a wondrous, charmed place called an Encanto. The magic of the Encanto has blessed every child in the family with a unique gift from super strength to the power to heal—every child except one, Mirabel. But when she discovers that the magic surrounding the Encanto is in danger, Mirabel decides that she, the only ordinary Madrigal, might just be her exceptional family's last hope.",
                 7.8F,
                 "24/11/2021",
-                "Animation, Comedy, Family, Fantasy"
+                "Animation, Comedy, Family, Fantasy",
+                true
             )
         )
 
@@ -77,7 +82,8 @@ object DataDummyUtil {
                 "Once the booming home of pharmaceutical giant Umbrella Corporation, Raccoon City is now a dying Midwestern town. The company’s exodus left the city a wasteland…with great evil brewing below the surface. When that evil is unleashed, the townspeople are forever…changed…and a small group of survivors must work together to uncover the truth behind Umbrella and make it through the night.",
                 6.0F,
                 "24/11/2021",
-                "Horror, Action, Science Fiction"
+                "Horror, Action, Science Fiction",
+                true
             )
         )
 
@@ -89,7 +95,8 @@ object DataDummyUtil {
                 "Plagued by strange memories, Neo's life takes an unexpected turn when he finds himself back inside the Matrix.",
                 6.9F,
                 "16/12/2021",
-                "Science Fiction, Action, Adventure"
+                "Science Fiction, Action, Adventure",
+                true
             )
         )
 
@@ -101,7 +108,8 @@ object DataDummyUtil {
                 "After finding a host body in investigative reporter Eddie Brock, the alien symbiote must face a new enemy, Carnage, the alter ego of serial killer Cletus Kasady.",
                 7.1F,
                 "30/09/2021",
-                "Science Fiction, Action, Adventure"
+                "Science Fiction, Action, Adventure",
+                true
             )
         )
 
@@ -113,7 +121,8 @@ object DataDummyUtil {
                 "An Interpol-issued Red Notice is a global alert to hunt and capture the world's most wanted. But when a daring heist brings together the FBI's top profiler and two rival criminals, there's no telling what will happen.",
                 6.8F,
                 "04/11/2021",
-                "Action, Comedy, Crime, Thriller"
+                "Action, Comedy, Crime, Thriller",
+                true
             )
         )
 
@@ -125,7 +134,8 @@ object DataDummyUtil {
                 "Shang-Chi must confront the past he thought he left behind when he is drawn into the web of the mysterious Ten Rings organization.",
                 7.8F,
                 "01/09/2021",
-                "Action, Adventure, Fantasy"
+                "Action, Adventure, Fantasy",
+                true
             )
         )
 
@@ -137,7 +147,8 @@ object DataDummyUtil {
                 "When Van Helsing's mysterious invention, the \"Monsterfication Ray,\" goes haywire, Drac and his monster pals are all transformed into humans, and Johnny becomes a monster. In their new mismatched bodies, Drac and Johnny must team up and race across the globe to find a cure before it's too late, and before they drive each other crazy.",
                 7.7F,
                 "13/01/2022",
-                "Animation, Family, Fantasy, Comedy, Adventure"
+                "Animation, Family, Fantasy, Comedy, Adventure",
+                true
             )
         )
 
@@ -149,7 +160,8 @@ object DataDummyUtil {
                 "A reformed sociopath heads to a remote island after the death of his brother. Soon after his arrival, the island falls under siege from a deadly gang of mercenaries, and when he discovers their role in his brother’s demise, he sets out on a relentless quest for vengeance.",
                 6.7F,
                 "05/11/2021",
-                "Action, Thriller"
+                "Action, Thriller",
+                true
             )
         )
 
@@ -161,7 +173,8 @@ object DataDummyUtil {
                 "When cop David is injured in a drug bust gone wrong, his partner Cal chases the two criminals who shot him. They all land at a remote farm owned by troubled vet Eric, and as Cal and Eric plot their defense, more of the gang arrives - along with a wounded David. Outnumbered, the three heroes must use stealth, smarts, and good shooting to take down the drug-dealing mob.",
                 6.0F,
                 "08/10/2021",
-                "Action, Thriller, Crime"
+                "Action, Thriller, Crime",
+                true
             )
         )
 
@@ -173,7 +186,8 @@ object DataDummyUtil {
                 "A small-town Oregon teacher and her brother, the local sheriff, discover a young student is harbouring a dangerous secret that could have frightening consequences.",
                 6.5F,
                 "28/10/2021",
-                "Drama, Horror, Mystery"
+                "Drama, Horror, Mystery",
+                true
             )
         )
 
@@ -185,7 +199,8 @@ object DataDummyUtil {
                 "The story revolves around a top-secret resort for retired U.S. intelligence officers. A group of criminals led by Balzary breach the compound, hellbent on revenge on Robert, forcing the retired officer and his son to save the day.",
                 6.3F,
                 "17/12/2021",
-                "Crime, Action, Thriller"
+                "Crime, Action, Thriller",
+                true
             )
         )
 
@@ -197,7 +212,8 @@ object DataDummyUtil {
                 "Tanjirō Kamado, joined with Inosuke Hashibira, a boy raised by boars who wears a boar's head, and Zenitsu Agatsuma, a scared boy who reveals his true power when he sleeps, boards the Infinity Train on a new mission with the Fire Hashira, Kyōjurō Rengoku, to defeat a demon who has been tormenting the people and killing the demon slayers who oppose it!",
                 8.4F,
                 "16/10/2020",
-                "Animation, Action, Adventure, Fantasy"
+                "Animation, Action, Adventure, Fantasy",
+                true
             )
         )
 
@@ -209,7 +225,8 @@ object DataDummyUtil {
                 "As Emily struggles to fit in at home and at school, she discovers a small red puppy who is destined to become her best friend. When Clifford magically undergoes one heck of a growth spurt, becomes a gigantic dog and attracts the attention of a genetics company, Emily and her Uncle Casey have to fight the forces of greed as they go on the run across New York City. Along the way, Clifford affects the lives of everyone around him and teaches Emily and her uncle the true meaning of acceptance and unconditional love.",
                 7.4F,
                 "10/11/2021",
-                "Animation, Comedy, Family"
+                "Animation, Comedy, Family",
+                true
             )
         )
 
@@ -221,7 +238,8 @@ object DataDummyUtil {
                 "With the help of the \"Dragon Sin of Wrath\" Meliodas and the worst rebels in history, the Seven Deadly Sins, the \"Holy War\", in which four races, including Humans, Goddesses, Fairies and Giants fought against the Demons, is finally over. At the cost of the \"Lion Sin of Pride\" Escanor's life, the Demon King was defeated and the world regained peace. After that, each of the Sins take their own path.",
                 8.0F,
                 "02/07/2021",
-                "Animation, Fantasy"
+                "Animation, Fantasy",
+                true
             )
         )
 
@@ -233,7 +251,8 @@ object DataDummyUtil {
                 "An enchanting making-of story told through all-new in-depth interviews and cast conversations, inviting fans on a magical first-person journey through one of the most beloved film franchises of all time.",
                 8.5F,
                 "01/01/2022",
-                "Documentary"
+                "Documentary",
+                true
             )
         )
 
@@ -245,7 +264,8 @@ object DataDummyUtil {
                 "Twenty-five years after a streak of brutal murders shocked the quiet town of Woodsboro, a new killer has donned the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town’s deadly past.",
                 7.2F,
                 "12/01/2022",
-                "Horror, Mystery, Thriller"
+                "Horror, Mystery, Thriller",
+                true
             )
         )
 
@@ -263,7 +283,8 @@ object DataDummyUtil {
                 "The continuing story of Peacemaker – a compellingly vainglorious man who believes in peace at any cost, no matter how many people he has to kill to get it – in the aftermath of the events of \"The Suicide Squad.\"",
                 8.5F,
                 "13/01/2022",
-                "Action & Adventure, Comedy, Sci-Fi & Fantasy"
+                "Action & Adventure, Comedy, Sci-Fi & Fantasy",
+                false
             )
         )
 
@@ -275,7 +296,8 @@ object DataDummyUtil {
                 "Legendary bounty hunter Boba Fett and mercenary Fennec Shand must navigate the galaxy’s underworld when they return to the sands of Tatooine to stake their claim on the territory once ruled by Jabba the Hutt and his crime syndicate.",
                 8.2F,
                 "29/12/2021",
-                "Sci-Fi & Fantasy, Action & Adventure"
+                "Sci-Fi & Fantasy, Action & Adventure",
+                false
             )
         )
 
@@ -287,7 +309,8 @@ object DataDummyUtil {
                 "This Karate Kid sequel series picks up 30 years after the events of the 1984 All Valley Karate Tournament and finds Johnny Lawrence on the hunt for redemption by reopening the infamous Cobra Kai karate dojo. This reignites his old rivalry with the successful Daniel LaRusso, who has been working to maintain the balance in his life without mentor Mr. Miyagi.",
                 8.1F,
                 "02/05/2018",
-                "Action & Adventure, Drama"
+                "Action & Adventure, Drama",
+                false
             )
         )
 
@@ -299,7 +322,8 @@ object DataDummyUtil {
                 "Head back to Elite Way School as a new generation of students hope to win the Battle of the Bands.",
                 7.4F,
                 "05/01/2022",
-                "Drama"
+                "Drama",
+                false
             )
         )
 
@@ -311,7 +335,8 @@ object DataDummyUtil {
                 "During a perilous 24-hour mission on the moon, space explorers try to retrieve samples from an abandoned research facility steeped in classified secrets.",
                 8.1F,
                 "24/12/2021",
-                "Drama, Sci-Fi & Fantasy"
+                "Drama, Sci-Fi & Fantasy",
+                false
             )
         )
 
@@ -323,7 +348,8 @@ object DataDummyUtil {
                 "Follow Moiraine, a member of the shadowy and influential all-female organization called the “Aes Sedai” as she embarks on a dangerous, world-spanning journey with five young men and women. Moiraine believes one of them might be the reincarnation of an incredibly powerful individual, whom prophecies say will either save humanity or destroy it.",
                 7.9F,
                 "18/11/2021",
-                "Sci-Fi & Fantasy, Drama"
+                "Sci-Fi & Fantasy, Drama",
+                false
             )
         )
 
@@ -335,7 +361,8 @@ object DataDummyUtil {
                 "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \"meta-human\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
                 7.8F,
                 "07/10/2014",
-                "Drama, Sci-Fi & Fantasy"
+                "Drama, Sci-Fi & Fantasy",
+                false
             )
         )
 
@@ -347,7 +374,8 @@ object DataDummyUtil {
                 "This game show sees contestants solve word puzzles, similar to those used in Hangman, to win cash and prizes determined by spinning a giant carnival wheel.",
                 6.8F,
                 "19/09/1983",
-                "Family"
+                "Family",
+                false
             )
         )
 
@@ -359,7 +387,8 @@ object DataDummyUtil {
                 "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape.",
                 8.5F,
                 "25/01/2016",
-                "Crime, Sci-Fi & Fantasy"
+                "Crime, Sci-Fi & Fantasy",
+                false
             )
         )
 
@@ -371,7 +400,8 @@ object DataDummyUtil {
                 "Follows the personal and professional lives of a group of doctors at Seattle’s Grey Sloan Memorial Hospital.",
                 8.2F,
                 "27/03/2005",
-                "Drama"
+                "Drama",
+                false
             )
         )
 
@@ -383,7 +413,8 @@ object DataDummyUtil {
                 "Former Avenger Clint Barton has a seemingly simple mission: get back to his family for Christmas. Possible? Maybe with the help of Kate Bishop, a 22-year-old archer with dreams of becoming a superhero. The two are forced to work together when a presence from Barton’s past threatens to derail far more than the festive spirit.",
                 8.4F,
                 "24/11/2021",
-                "Action & Adventure, Drama"
+                "Action & Adventure, Drama",
+                false
             )
         )
 
@@ -395,7 +426,8 @@ object DataDummyUtil {
                 "A gangster family epic set in 1919 Birmingham, England and centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby, who means to move up in the world.",
                 8.6F,
                 "12/09/2013",
-                "Crime, Drama"
+                "Crime, Drama",
+                false
             )
         )
 
@@ -407,7 +439,8 @@ object DataDummyUtil {
                 "After a vintage Chucky doll turns up at a suburban yard sale, an idyllic American town is thrown into chaos as a series of horrifying murders begin to expose the town’s hypocrisies and secrets. Meanwhile, the arrival of enemies — and allies — from Chucky’s past threatens to expose the truth behind the killings, as well as the demon doll’s untold origins.",
                 7.9F,
                 "12/10/2021",
-                "Crime"
+                "Crime",
+                false
             )
         )
 
@@ -419,7 +452,8 @@ object DataDummyUtil {
                 "",
                 5.0F,
                 "08/11/2021",
-                "Soap, Drama"
+                "Soap, Drama",
+                false
             )
         )
 
@@ -431,7 +465,8 @@ object DataDummyUtil {
                 "Three lucky contestants put their pop culture knowledge to the test to complete iconic, People Puzzler crosswords. The player with the most points at the end of three rounds wins the game and goes on to play the \"Fast Puzzle Round\" for an enormous cash prize.",
                 6.1F,
                 "18/01/2021",
-                "Drama"
+                "Drama",
+                false
             )
         )
 
@@ -443,7 +478,8 @@ object DataDummyUtil {
                 "Hundreds of cash-strapped players accept a strange invitation to compete in children's games—with high stakes. But, a tempting prize awaits the victor.",
                 7.8F,
                 "17/09/2021",
-                "Action & Adventure, Mystery, Drama"
+                "Action & Adventure, Mystery, Drama",
+                false
             )
         )
 
@@ -455,7 +491,8 @@ object DataDummyUtil {
                 "Gao Liang and Gu Yi Ye are good friends and rivals since they joined the army. They fall in love with the same girl, Jiang Nan Zheng. However, Gu Yi Ye eventually gives up his love in the name of friendship and marries A Xiu, the daughter of their old squad leader who died in a war. As time passes, Gao Liang not only stays true to his heart but also shoulders the duties and mission of a soldier. In 2003, Gao Liang and Jiang Nan Cheng got married and formed a happy family. In 2008, Gao Liang, who returns from further studies in Russia, was transferred to be the acting brigade commander of the Blue Army because of an observation report.",
                 7.3F,
                 "26/12/2021",
-                "Action & Adventure, War & Politics, Drama"
+                "Action & Adventure, War & Politics, Drama",
+                false
             )
         )
 
@@ -467,7 +504,8 @@ object DataDummyUtil {
                 "While running from a drug deal gone bad, Mike Ross, a brilliant young college-dropout, slips into a job interview with one of New York City's best legal closers, Harvey Specter. Tired of cookie-cutter law school grads, Harvey takes a gamble by hiring Mike on the spot after he recognizes his raw talent and photographic memory.",
                 8.1F,
                 "23/06/2011",
-                "Drama"
+                "Drama",
+                false
             )
         )
 
@@ -479,7 +517,8 @@ object DataDummyUtil {
                 "A drama depicting a sweet twist in love between the parents and children of three families around the love of two main characters.",
                 2.0F,
                 "13/12/2021",
-                "Family, Comedy, Drama"
+                "Family, Comedy, Drama",
+                false
             )
         )
 
@@ -491,7 +530,8 @@ object DataDummyUtil {
                 "Shaun Murphy, a young surgeon with autism and savant syndrome, relocates from a quiet country life to join a prestigious hospital's surgical unit. Unable to personally connect with those around him, Shaun uses his extraordinary medical gifts to save lives and challenge the skepticism of his colleagues.",
                 8.6F,
                 "25/09/2021",
-                "Drama"
+                "Drama",
+                false
             )
         )
 
@@ -649,6 +689,20 @@ object DataDummyUtil {
                     "Western"
                 )
             )
+        )
+    }
+
+    fun getDetailMovie(): MovieEntity{
+        return MovieEntity(
+            438695L,
+            "Sing 2",
+            "/aWeKITRFbbwY8txG5uCj4rMCfSP.jpg",
+            "Buster and his new cast now have their sights set on debuting a new show at the Crystal Tower Theater in glamorous Redshore City. But with no connections, he and his singers must sneak into the Crystal Entertainment offices, run by the ruthless wolf mogul Jimmy Crystal, where the gang pitches the ridiculous idea of casting the lion rock legend Clay Calloway in their show. Buster must embark on a quest to find the now-isolated Clay and persuade him to return to the stage.",
+            8.2F,
+            "01/12/2021",
+            "Comedy, Animation, Family, Music",
+            isMovies = true,
+            isFavorite = false
         )
     }
 
@@ -1155,52 +1209,6 @@ object DataDummyUtil {
                 "25/09/2021",
                 8.6F
             )
-        )
-    }
-
-    fun generateRemoteDetailMovie(): DetailMovieResponse {
-        return DetailMovieResponse(
-            listOf(
-                GenresResponse.GenreItem(
-                    28,
-                    "Action"
-                ),
-                GenresResponse.GenreItem(
-                    12,
-                    "Adventure"
-                ),
-                GenresResponse.GenreItem(
-                    14,
-                    "Fantasy"
-                ),
-                GenresResponse.GenreItem(
-                    878,
-                    "Science Fiction"
-                ),
-            ),
-            524434L,
-            "The Eternals are a team of ancient aliens who have been living on Earth in secret for thousands of years. When an unexpected tragedy forces them out of the shadows, they are forced to reunite against mankind’s most ancient enemy, the Deviants.",
-            "/b6qUu00iIIkXX13szFy7d0CyNcg.jpg",
-            7.3F,
-            FormatUtil.dateFormat("2021-11-03"),
-            "Eternals"
-        )
-    }
-
-    fun generateRemoteDetailTv(): DetailTvResponse {
-        return DetailTvResponse(
-            listOf(
-                GenresResponse.GenreItem(
-                    18,
-                    "Drama"
-                )
-            ),
-            85552L,
-            "A group of high school students navigate love and friendships in a world of drugs, sex, trauma, and social media.",
-            "/jtnfNzqZwN4E32FGGxx1YZaBWWf.jpg",
-            8.4F,
-            FormatUtil.dateFormat("2019-06-16"),
-            "Euphoria"
         )
     }
 }

@@ -1,6 +1,6 @@
 package com.setianjay.watchme.data.source.remote
 
-class Resource<T>(val statusType: StatusType, val data: T?, val message: Int?) {
+class Resource<T>(val statusType: StatusType, val data: T?, val message: String?) {
     enum class StatusType {
         LOADING,
         SUCCESS,
@@ -16,7 +16,7 @@ class Resource<T>(val statusType: StatusType, val data: T?, val message: Int?) {
             return Resource(StatusType.SUCCESS, data, null )
         }
 
-        fun <T> error(message: Int): Resource<T>{
+        fun <T> error(message: String): Resource<T>{
             return Resource(StatusType.ERROR, null, message)
         }
     }

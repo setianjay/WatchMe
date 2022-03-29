@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'androidx.navigation.safeargs'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -39,6 +41,10 @@ android {
 dependencies {
     /* core */
     implementation "androidx.core:core-ktx:$coreKtxVersion"
+
+    /* local database */
+    implementation "androidx.room:room-runtime:$roomRuntimeVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 
     /* livedata */
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedataVersion"
@@ -84,11 +90,13 @@ dependencies {
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    //paging
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
 
     /* view model */
     implementation "androidx.lifecycle:lifecycle-extensions:$viewmodelVersion"
     //activity ktx
-    implementation "androidx.activity:activity-ktx:$viewmodelKtxVersion"
+    implementation "androidx.activity:activity-ktx:$viewmodelActivityKtxVersion"
     //fragment ktx
-    implementation "androidx.fragment:fragment-ktx:$viewmodelKtxVersion"
+    implementation "androidx.fragment:fragment-ktx:$viewmodelFragmentKtxVersion"
 }

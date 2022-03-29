@@ -10,6 +10,7 @@
     <color name="black">#FF000000</color>
     <color name="dark_blue">#031135</color>
     <color name="gray">#C4C4C4</color>
+    <color name="dark_gray">#606060</color>
     <color name="gold">#F1B10D</color>
     <color name="red">#E3342F</color>
     <color name="white_primary">#FFFFFFFF</color>
